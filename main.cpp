@@ -3,146 +3,107 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-
-// int main(){
-//     address awal, akhir;
-//     address P, Q, R, S;
-//     awal = NULL;
-//     akhir = NULL;
-
-
-//     printf("Node Saat ini:\n");
-//     showNode(awal);
-
-//     printf("\n\nPenambahan\n");
-//     addNodeFirst(awal, akhir, P, 35);
-//     showNode    (awal);
-
-//     printf("\nPenambahan di Awal\n");
-//     addNodeFirst(awal, akhir, Q, 11);
-//     showNode    (awal);
-
-//     printf("\nPenambahan di Tengah\n");
-//     addNodeMiddle(awal, R, 23);
-//     showNode    (awal);
-    
-//     printf("\nPenambahan di Akhir\n");
-//     addNodeLast (awal, akhir, S, 110);
-//     showNode    (awal);
-
-//     printf("\n\nPenghapusan di awal\n");
-//     removeNodeFirst (awal);
-//     showNode        (awal);
-
-//     printf("\n\nPenghapusan di tengah\n");
-//     removeNodeMiddle(awal);
-//     showNode        (awal);
-
-//     printf("\n\nPenghapusan di akhir\n");
-//     removeNodeLast  (awal,akhir);
-//     showNode        (awal);
-
-    // printf("\n\nSearching Node Info 23\n");
-    // address search = searchingNode(awal, 23);
-    // if (search == NULL){
-    //     cout << "Maaf tidak ada Node dengan nilai " << 23 <<endl;
-    // }
-    // else{
-    //     cout << "Node Ditemukan " <<endl;
-    //     search -> info = 25;
-    // }
-    // showNode(awal);
-    // cout <<endl;
-
-//     removeNode(P);
-//     removeNode(Q);
-//     removeNode(R);
-//     removeNode(S);
-//     removeNode(search);
-
-//     return 0;
-// }
-
+#include <string.h>
+#include <Windows.h>
 
 int main(){
-    address awal, akhir, search;
-    address P, Q, R, S;
+    address awal, search, Head;
     awal = NULL;
-    akhir = NULL;
-    int pilihan, nilai, nilai2, aksiSearch;
-    
-    do{
-        system ("cls");
-        cout << "\t============================================\n";
-        cout << "\t              Node Saat ini:";
-        showNode(awal);
-        cout << "\n\t============================================\n";
-        cout << "------------------------------------------------------------\n";
-        cout << "| 1. Tambah Awal   || 4. Hapus Awal    || 7. Temukan Node  |\n";
-        cout << "| 2. Tambah Tengah || 5. Hapus Tengah  || 0. Keluar        |\n";
-        cout << "| 3. Tambah Akhir  || 6. Hapus Akhir   ||                  |\n";
-        cout << "------------------------------------------------------------\n";
-        cout << "  Lakukan Aksi Pada Node = "; cin >> pilihan;
-        if (((pilihan <= 3) && (pilihan > 0))||( pilihan == 7)){
-            cout << "  Masukkan Nilai = "; cin >> nilai;
-        }
-        cout << "------------------------------------------------------------\n";
+    int pilihan, giliran = 0;
+    int info_simbol;
+    int size_board = 3;
+    bool loop = true;
+    string player1, player2;
 
-        switch (pilihan){
-            case 0:
-                break;
-            case 1: 
-                addNodeFirst(awal, akhir, P, nilai);
-                break;
-            case 2:
-                addNodeMiddle(awal, R, nilai);
-                break;
-            case 3:
-                addNodeLast(awal, akhir, S, nilai);
-                break;
-            case 4:
-                removeNodeFirst(awal);
-                break;
-            case 5:
-                removeNodeMiddle(awal);
-                break;
-            case 6:
-                removeNodeLast(awal, akhir);
-                break;
-            case 7:
-                search = searchingNode(awal, nilai);
-                if (search == NULL){
-                    cout << " !! Maaf tidak ada Node dengan nilai !! " << nilai <<endl;
+    pilihan = menu();
+
+    switch(pilihan){
+        case 1:
+            do{
+                loop = false;
+                system("cls");
+                SetConsoleOutputCP(CP_UTF8);
+                cout << "	❎\xE2\x9D\x8E";
+                cout << "----------------------------------------\n";
+                cout << "| 1. 3 X 3   || 4. 6 X 6   || 0. Back   |\n";
+                cout << "| 2. 4 X 4   || 5. 7 X 7   ||           |\n";
+                cout << "| 3. 5 X 5   || 6. 8 x 8   ||           |\n";
+                cout << "----------------------------------------\n";
+                cout << "Insert Size Board = ";
+                cin >> size_board;
+                cout << "Insert Name Player 1 = ";
+                cin >> player1;
+                cout << "Insert Name Player 2 = ";
+                cin >> player2;
+
+                if(size_board < 0 || size_board > 6){
+                    cout << " !! The Input is Wrong, Press Enter to Insert Again !! ";
+                    cin.ignore();
+                    cin.get();
+                    loop = true;
+                }
+            }while(loop == true);
+
+            size_board = size_board + 2;
+            Head = createBoard(size_board);
+
+            do{
+                showBoard(Head, size_board);
+                if(giliran == 0){
+                    cout << player1 << ", Insert the Number = ";
+                    giliran = -1;
                 }
                 else{
-                    cout << "         Node Ditemukan \n";
-                    cout << "................................\n";
-                    cout << "| 1. Edit Info Node            |\n";
-                    cout << "| 2. Hapus Node                |\n";
-                    cout << "| 0. Kembali                   |\n";
-                    cout << "................................\n";
-                    cout << "  Lakukan Aksi = "; cin >> aksiSearch;
-                    if (aksiSearch == 1){
-                        cout << "  Masukkan Nilai = "; cin >> nilai2;
-                        search -> info = nilai2;
-                    }
-                    else if(aksiSearch == 2){
-                        removeNodeAnywhere (awal, akhir, search);
-                    }
+                    cout << player2 << ", Insert the Number = ";
+                    giliran = 0;
                 }
-                this_thread::sleep_for(chrono::seconds(2));
-                break;
-            default:
-                pilihan = 1;
-                break;
-        }
-    }while (pilihan != 0);
+                cin >> info_simbol;
+                search = searchingNode(Head, info_simbol);
 
-    removeNode(P);
-    removeNode(Q);
-    removeNode(R);
-    removeNode(S);
-    removeNode(search);
+                if (search != nullptr){
+                    search -> info = giliran;
+                }
+                else{
+                    if (giliran == 0){
+                        giliran = -1;
+                    }
+                    else {
+                        giliran = 0;
+                    }
+                    cout << " !! Sorry, Dosen't exist the number " << info_simbol << " , Press Enter to Insert Again !! ";
+                    cin.ignore();
+                    cin.get();
+                }
+                loop = checkBoard(Head);
+            }while(loop);
+            showBoard(Head, size_board);
+
+            break;
+        
+        case 2:
+            system("CLS");
+            // instructions();
+            break;
+
+        case 3:
+            system("CLS");
+            // aboutus();
+            break;
+
+        case 0:
+            exit(1);
+            break;
+
+        default:
+            menu();
+            break;
+	}
+
+
+
+    saveRecords("game_records.dat", awal);
+    readRecords("game_records.dat", awal);
+
+
     return 0;
 }
-
