@@ -406,3 +406,112 @@ bool checkEmptyBoard(address Head){
     }
     return false;
 }
+
+bool checkWin(address node, int streak, infotype nilai){
+    int count = 1;
+    address temp;
+    
+    // check horizontal
+    temp = node->prev;
+    while(temp != nullptr){
+        if(temp->info == nilai){
+            count ++;
+        }
+        temp = temp->prev;
+    }
+    
+    temp = node->next;
+    while(temp != nullptr){
+        if(temp->info == nilai){
+            count ++;
+        }
+        temp = temp->next;
+    }
+    if(count >= streak){
+        return true;
+    }
+    else{
+        //check vertical
+        count = 1;
+        temp = node->down;
+        while(temp != nullptr){
+            if(temp->info == nilai){
+                count ++;
+            }
+            temp = temp->down;
+        }
+        temp = node->up;
+        while(temp != nullptr){
+            if(temp->info == nilai){
+                count ++;
+            }
+            temp = temp->up;
+        }
+        if(count >= streak){
+            return true;
+        }
+        else{
+            //check diagonal main (ke kanan menurun)
+            count = 1;
+            temp = node->prev;
+            if(temp!= nullptr){temp = temp->up;}
+            while(temp != nullptr){
+                if(temp->info == nilai){
+                    count ++;
+                }
+                temp = temp->prev;
+                if(temp!= nullptr){temp = temp->up;}
+                else{break;}
+            }
+
+            temp = node->next;
+            if(temp!=nullptr){temp = temp->down;}
+            while(temp != nullptr){
+                if(temp->info == nilai){
+                    count ++;
+                }
+                temp = temp->next;
+                if(temp!=nullptr){temp = temp->down;}
+                else{break;}
+            }
+
+            if(count >= streak){
+                return true;
+            }
+            else{
+                //check diagonal sekunder (ke kanan menurun)
+                count = 1;
+                temp = node->next;
+                if(temp!= nullptr){temp = temp->up;}
+                while(temp != nullptr){
+                    if(temp->info == nilai){
+                        count ++;
+                    }
+                    temp = temp->next;
+                    if(temp!= nullptr){temp = temp->up;}
+                    else{break;}
+                }
+
+                temp = node->prev;
+                if(temp!=nullptr){temp = temp->down;}
+                while(temp != nullptr){
+                    if(temp->info == nilai){
+                        count ++;
+                    }
+                    temp = temp->prev;
+                    if(temp!=nullptr){temp = temp->down;}
+                    else{break;}
+                }
+
+                if(count >= streak){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+        }
+
+    }
+}

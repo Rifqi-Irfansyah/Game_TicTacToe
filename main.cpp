@@ -23,7 +23,6 @@ int main(){
                 loop = false;
                 system("cls");
                 SetConsoleOutputCP(CP_UTF8);
-                cout << "	❎\xE2\x9D\x8E";
                 cout << "----------------------------------------\n";
                 cout << "| 1. 3 X 3   || 4. 6 X 6   || 0. Back   |\n";
                 cout << "| 2. 4 X 4   || 5. 7 X 7   ||           |\n";
@@ -62,6 +61,15 @@ int main(){
 
                 if (search != nullptr){
                     search -> info = giliran;
+                    bool win = checkWin(search, 3, giliran);
+
+                    if(win == true){
+                        showBoard(Head, size_board);
+                        cout << "Kamu Menang, " << giliran;
+                        int a;
+                        cin>> a;
+                        loop = false;
+                    }
                 }
                 else{
                     if (giliran == 0){

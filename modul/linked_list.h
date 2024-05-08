@@ -70,6 +70,7 @@ void readRecords(const char* filename, address& head);
 void saveRecords(const char* filename, address head);
 bool checkBoard(address Head);
 bool checkEmptyBoard(address Head);
+bool checkWin(address node, int streak, infotype nilai);
 
 #include"body.cpp"
 
