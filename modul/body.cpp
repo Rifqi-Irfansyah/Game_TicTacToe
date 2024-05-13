@@ -254,55 +254,86 @@ address searchingNode(address Head, infotype nilai){
     return result;
 }
 
-void saveRecords(const char* filename, address head) {
-    std::ofstream outFile(filename, std::ios::binary);
+void saveRecords(const char* filename, address head, int size_board) {
+    ofstream outFile(filename, ios::binary);
     if (!outFile) {
-        std::cerr << "Error opening file for writing!" << std::endl;
+        cerr << "Error opening file for writing!" << std::endl;
         return;
     }
 
-    address current = head;
-    while (current != nullptr) {
-        // Write each member of Memo to the file
-        outFile.write(reinterpret_cast<char*>(&current->info), sizeof(int));
-
-        current = current->next;
+    outFile.write(reinterpret_cast<char*>(&size_board), sizeof(int));
+    
+    address temp = head;
+    address temp_start;
+    for(int i=1; i<=size_board; i++){
+        temp_start = temp;
+        for (int j=1; j<= size_board; j++){
+            outFile.write(reinterpret_cast<char*>(&temp->info), sizeof(int));
+            temp = temp->next;
+        }
+        temp = temp_start->down;
     }
-
     outFile.close();
 }
 
-void readRecords(const char* filename, address& head) {
-    std::ifstream inFile(filename, std::ios::binary);
+int readRecords(const char* filename, address& head) {
+    int size_board;
+    ifstream inFile(filename, ios::binary);
+    head = NULL;
     if (!inFile) {
-        std::cerr << "Error opening file for reading!" << std::endl;
-        return;
+        return 0;
     }
 
-    // Initialize head pointer
-    head = nullptr;
-    address current = nullptr;
-    while (inFile.peek() != EOF) {
+    inFile.read(reinterpret_cast<char*>(&size_board), sizeof(int));
+
+    address rowStart = NULL;
+    address upNode = NULL;
+    address temp_last = NULL;
 
 
-        // Create a new Memo object
-        address newNode = new ElmtList;
+    for(int i=1; i<=size_board; i++){
 
-        // Read data from file into the new Memo object
-        inFile.read(reinterpret_cast<char*>(&newNode->info), sizeof(int));
+        for(int i=1; i<=size_board; i++){
+            address newNode = (address) malloc(sizeof (tElmtlist));
 
-        // Link the new node to the linked list
-        if (!head) {
-            head = newNode;
-        } else {
-            current->next = newNode;
-            // newNode->prev = current;
+            if (newNode == NULL){
+                printf("Memori Full");
+            }
+            else{
+                inFile.read(reinterpret_cast<char*>(&newNode->info), sizeof(int));
+                
+                newNode -> next = NULL;
+                newNode -> prev = NULL;
+                newNode -> up   = NULL;
+                newNode -> down = NULL;
+            }
+
+            if (head == NULL){
+                head = newNode;
+            }
+            if (rowStart == NULL){
+                rowStart = newNode;
+            }
+            else{
+                newNode -> prev = temp_last;
+                temp_last -> next = newNode;
+            }
+
+            if(upNode != NULL){
+                upNode -> down = newNode;
+                newNode -> up = upNode;
+                upNode = upNode -> next;
+            }
+            temp_last = newNode;
         }
-        current = newNode;
-        current->next = NULL;
-    }
 
+    upNode = rowStart;
+    rowStart = NULL;
+
+    }   
     inFile.close();
+    return size_board;
+
 }
 
 void gotoxy(int x, int y) //modul untuk memfungsikan fungsi gotoxy
@@ -325,49 +356,50 @@ void warnateks(int warna) //modul yang berfungsi untuk memberi warna ke karakter
 void judul()//sebagai tampilan awal program
 { 
 	warnateks(LIGHT_BLUE);
-	gotoxy(8,1); printf("  ����������  ��   �����             ����������   ����    ����� \n");
-	printf("              ��      ��  ��                     ��      ��  ��  ��     \n");
-	printf("              ��      ��  ��                     ��      ��  ��  ��     \n");
-	printf("              ��      ��  ��                     ��      ������  ��     \n");
-	printf("              ��      ��  ��                     ��      ��  ��  ��     \n");
-	printf("              ��      ��   �����                 ��      ��  ��   ����� \n \n\n\n");
+	gotoxy(8,1); 
+    printf("\n          [][][][][][]  [][]   [][][][][]          [][][][][][]   [][][][]    [][][][][] \n");
+	printf("              [][]      [][]  [][]                     [][]      [][]  [][]  [][]     \n");
+	printf("              [][]      [][]  [][]                     [][]      [][]  [][]  [][]     \n");
+	printf("              [][]      [][]  [][]                     [][]      [][][][][]  [][]     \n");
+	printf("              [][]      [][]  [][]                     [][]      [][]  [][]  [][]     \n");
+	printf("              [][]      [][]   [][][][][]              [][]      [][]  [][]   [][][][][] \n\n\n\n");
 	
-	printf("      		           ����������  �����   ����� \n");
-	printf("	 	               ��     ��   ��  �     \n");
-	printf("		               ��     ��   ��  ����� \n");
-	printf("		               ��     ��   ��  � \n");
-	printf("                               ��     ��   ��  �     \n");
-	printf("		               ��      �����   ����� \n");
+	printf("      		               [][][][][][]  [][][][][]   [][][][][] \n");
+	printf("	 	                   [][]     [][]   [][]  []          \n");
+	printf("		                   [][]     [][]   [][]  [][][][][]  \n");
+	printf("		                   [][]     [][]   [][]  []          \n");
+	printf("                                   [][]     [][]   [][]  []          \n");
+	printf("		                   [][]      [][][][][]   [][][][][] \n");
 	
 	warnateks(LIGHT_GREEN);
-	gotoxy(9,18); printf("��       �� \n");
-	gotoxy(9,19); printf("  ��   �� \n");
-	gotoxy(9,20); printf("    ��� \n");
-	gotoxy(9,21); printf("    ��� \n");
-	gotoxy(9,22); printf("  ��   �� \n");
-	gotoxy(9,23); printf("��       �� \n");	
+	gotoxy(9,18); printf("[][]       [][] \n");
+	gotoxy(9,19); printf("  [][]   [][] \n");
+	gotoxy(9,20); printf("    [][][] \n");
+	gotoxy(9,21); printf("    [][][] \n");
+	gotoxy(9,22); printf("  [][]   [][] \n");
+	gotoxy(9,23); printf("[][]       [][] \n");	
 	warnateks(YELLOW);
-	gotoxy(61,18); printf("    ����  \n");
-	gotoxy(61,19); printf("  ��    �� \n");
-	gotoxy(61,20); printf("  ��    �� \n");
-	gotoxy(61,21); printf("  ��    �� \n");
-	gotoxy(61,22); printf("  ��    �� \n");
-	gotoxy(61,23); printf("    ���� \n");	
+	gotoxy(70,18); printf("    [][][][]  \n");
+	gotoxy(70,19); printf("  [][]    [][] \n");
+	gotoxy(70,20); printf("  [][]    [][] \n");
+	gotoxy(70,21); printf("  [][]    [][] \n");
+	gotoxy(70,22); printf("  [][]    [][] \n");
+	gotoxy(70,23); printf("    [][][][] \n");	
 }
 
 int menu() { 
-	int pilih_menu, i = 28;
+	int pilih_menu, i = 37;
 	judul();
 	warnateks(WHITE);
-	gotoxy(i,18);printf(" [�����������������������ͻ\n");
-   	gotoxy(i,19);printf(" �      MAIN MENU        �\n");
-   	gotoxy(i,20);printf(" �                       �\n");
-   	gotoxy(i,21);printf(" �   [1] PLAY NOW !      �\n");
-   	gotoxy(i,22);printf(" �   [2] INSTRUCTIONS    �\n");
-   	gotoxy(i,23);printf(" �   [3] THE CREATOR     �\n");
-   	gotoxy(i,24);printf(" �   [0] Exit            �\n");
-   	gotoxy(i,25);printf(" �                       �\n");
-   	gotoxy(i,26);printf(" �����������������������ͼ\n");
+	gotoxy(i,18);printf(" [][][][][][][][][][][][][]\n");
+   	gotoxy(i,19);printf(" []      MAIN MENU       []\n");
+   	gotoxy(i,20);printf(" []                      []\n");
+   	gotoxy(i,21);printf(" []   [1] PLAY NOW !     []\n");
+   	gotoxy(i,22);printf(" []   [2] INSTRUCTIONS   []\n");
+   	gotoxy(i,23);printf(" []   [3] THE CREATOR    []\n");
+   	gotoxy(i,24);printf(" []   [0] Exit           []\n");
+   	gotoxy(i,25);printf(" []                      []\n");
+   	gotoxy(i,26);printf(" [][][][][][][][][][][][][]\n");
 	gotoxy(i,28);printf("    Choose :            \n");
    	gotoxy(41,28);scanf("%d",&pilih_menu);
    	return pilih_menu;

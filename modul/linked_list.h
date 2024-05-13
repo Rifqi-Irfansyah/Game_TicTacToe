@@ -66,7 +66,7 @@ int menu();
 void warnateks(int warna);
 void judul();
 void gotoxy(int x, int y);
-void readRecords(const char* filename, address& head);
+int readRecords(const char* filename, address& head);
 void saveRecords(const char* filename, address head);
 bool checkBoard(address Head);
 bool checkEmptyBoard(address Head);
