@@ -255,7 +255,7 @@ address searchingNode(address Head, infotype nilai){
     return result;
 }
 
-void saveRecords(const char* filename, address head, int size_board, int giliran, char* player1, char* player2) {
+void saveRecords(const char* filename, address head, int size_board, int giliran, char player1[50], char player2[50]) {
     ofstream outFile(filename, ios::binary);
     if (!outFile) {
         cerr << "Error opening file for writing!" << std::endl;
@@ -264,8 +264,8 @@ void saveRecords(const char* filename, address head, int size_board, int giliran
 
     outFile.write(reinterpret_cast<char*>(&size_board), sizeof(int));
     outFile.write(reinterpret_cast<char*>(&giliran), sizeof(int));
-    outFile.write(reinterpret_cast<char*>(&player1), sizeof(player1));
-    outFile.write(reinterpret_cast<char*>(&player2), sizeof(char[50]));
+    outFile.write(reinterpret_cast<char*>(player1), sizeof(char[50]));
+    outFile.write(reinterpret_cast<char*>(player2), sizeof(char[50]));
 
     
     address temp = head;
@@ -281,7 +281,7 @@ void saveRecords(const char* filename, address head, int size_board, int giliran
     outFile.close();
 }
 
-int readRecords(const char* filename, address& head, int& giliran, char* player1, char* player2) {
+int readRecords(const char* filename, address& head, int& giliran, char (&player1)[50], char (&player2)[50]) {
     int size_board;
     ifstream inFile(filename, ios::binary);
     head = NULL;
@@ -291,7 +291,7 @@ int readRecords(const char* filename, address& head, int& giliran, char* player1
 
     inFile.read(reinterpret_cast<char*>(&size_board), sizeof(int));
     inFile.read(reinterpret_cast<char*>(&giliran), sizeof(int));
-    inFile.read(reinterpret_cast<char*>(&player1), sizeof(player1));
+    inFile.read(reinterpret_cast<char*>(&player1), sizeof(char[50]));
     inFile.read(reinterpret_cast<char*>(&player2), sizeof(char[50]));
 
     address rowStart = NULL;
@@ -372,10 +372,10 @@ void judul()//sebagai tampilan awal program
 	printf("              [][]      [][]   [][][][][]              [][]      [][]  [][]   [][][][][] \n\n\n\n");
 	
 	printf("      		               [][][][][][]  [][][][][]   [][][][][] \n");
-	printf("	 	                   [][]     [][]   [][]  []          \n");
-	printf("		                   [][]     [][]   [][]  [][][][][]  \n");
-	printf("		                   [][]     [][]   [][]  []          \n");
-	printf("                                   [][]     [][]   [][]  []          \n");
+	printf("	 	                   [][]     [][]    [][]  []          \n");
+	printf("		                   [][]     [][]    [][]  [][][][][]  \n");
+	printf("		                   [][]     [][]    [][]  []          \n");
+	printf("                                   [][]     [][]    [][]  []          \n");
 	printf("		                   [][]      [][][][][]   [][][][][] \n");
 	
 	warnateks(LIGHT_GREEN);
@@ -575,17 +575,17 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
     
     if(giliran == 0){
         warnateks(BLUE);
-        cout << player1 << ", Insert the Number = ";
+        strcpy(giliran_player, player1);
+        cout << giliran_player << ", Insert the Number = ";
         warnateks(WHITE);
         giliran = -1;
-        strcpy(giliran_player, player1);
     }
     else{
         warnateks(GREEN);
-        cout << player2 << ", Insert the Number = ";
+        strcpy(giliran_player, player2);
+        cout << giliran_player << ", Insert the Number = ";
         warnateks(WHITE);
         giliran = 0;
-        strcpy(giliran_player, player2);
     }
     cin >> info_simbol;
     

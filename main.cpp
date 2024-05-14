@@ -16,7 +16,6 @@ int main(){
     do{
         system("cls");
         Head = NULL;
-        giliran = 0;
         loop = true;
         loopLuar = true;
         pilihan = menu();
@@ -59,7 +58,6 @@ int main(){
                         cin.ignore();
                         cin.getline(player1, 50);
                         cout << "Insert Name Player 2 = ";
-                        cin.ignore();
                         cin.getline(player2, 50);
                     }
                 }while(loop == true);
@@ -67,6 +65,7 @@ int main(){
                 if(size_board != 0){
                     size_board = size_board + 2;
                     Head = createBoard(size_board);
+                    giliran = 0;
                     do{
                         showBoard(Head, size_board);
                         loop = gameplay(Head, size_board, giliran, player1, player2);
@@ -91,7 +90,7 @@ int main(){
             case 7:
                 do{
                     showBoard(Head, size_board);
-                    gameplay(Head, size_board, giliran, player1, player2);
+                    loop = gameplay(Head, size_board, giliran, player1, player2);
                 }while(loop);
 
                 break;
@@ -106,13 +105,5 @@ int main(){
         }
 
     }while(loopLuar);
-
-
-
-
-    
-    
-
-
     return 0;
 }
