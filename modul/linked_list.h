@@ -66,11 +66,12 @@ int menu();
 void warnateks(int warna);
 void judul();
 void gotoxy(int x, int y);
-int readRecords(const char* filename, address& head);
-void saveRecords(const char* filename, address head);
+int readRecords(const char* filename, address& head, int& giliran, char* player1, char* player2);
+void saveRecords(const char* filename, address head, int size_board, int giliran, char* player1, char* player2);
 bool checkBoard(address Head);
 bool checkEmptyBoard(address Head);
 bool checkWin(address node, int streak, infotype nilai);
+bool gameplay(address Head, int size_board, int &giliran, char* player1, char* player2);
 
 #include"body.cpp"
 

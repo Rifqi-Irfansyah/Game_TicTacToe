@@ -254,7 +254,7 @@ address searchingNode(address Head, infotype nilai){
     return result;
 }
 
-void saveRecords(const char* filename, address head, int size_board) {
+void saveRecords(const char* filename, address head, int size_board, int giliran, char* player1, char* player2) {
     ofstream outFile(filename, ios::binary);
     if (!outFile) {
         cerr << "Error opening file for writing!" << std::endl;
@@ -262,6 +262,10 @@ void saveRecords(const char* filename, address head, int size_board) {
     }
 
     outFile.write(reinterpret_cast<char*>(&size_board), sizeof(int));
+    outFile.write(reinterpret_cast<char*>(&giliran), sizeof(int));
+    outFile.write(reinterpret_cast<char*>(&player1), sizeof(char[50]));
+    outFile.write(reinterpret_cast<char*>(&player2), sizeof(char[50]));
+
     
     address temp = head;
     address temp_start;
@@ -276,7 +280,7 @@ void saveRecords(const char* filename, address head, int size_board) {
     outFile.close();
 }
 
-int readRecords(const char* filename, address& head) {
+int readRecords(const char* filename, address& head, int& giliran, char* player1, char* player2) {
     int size_board;
     ifstream inFile(filename, ios::binary);
     head = NULL;
@@ -285,6 +289,9 @@ int readRecords(const char* filename, address& head) {
     }
 
     inFile.read(reinterpret_cast<char*>(&size_board), sizeof(int));
+    inFile.read(reinterpret_cast<char*>(&giliran), sizeof(int));
+    inFile.read(reinterpret_cast<char*>(&player1), sizeof(char[50]));
+    inFile.read(reinterpret_cast<char*>(&player2), sizeof(char[50]));
 
     address rowStart = NULL;
     address upNode = NULL;
@@ -546,4 +553,89 @@ bool checkWin(address node, int streak, infotype nilai){
         }
 
     }
+}
+
+bool gameplay(address Head, int size_board, int &giliran, char* player1, char* player2){
+    address search;
+    char giliran_player[50];
+    int info_simbol;
+    bool win = false;
+    bool loop = true;
+
+    if (size_board == 3){
+        cout << " Menang = 3 Streak ";                
+    }
+    else if(size_board == 4 || size_board == 5){
+        cout << " Menang = 4 Streak ";
+    }
+    else{
+        cout << " Menang = 5 Streak ";
+    }
+    cout << "\n Press 0 to Exit \n";
+    
+    if(giliran == 0){
+        warnateks(BLUE);
+        cout << player1 << ", Insert the Number = ";
+        warnateks(WHITE);
+        giliran = -1;
+        strcpy(giliran_player, player1);
+    }
+    else{
+        warnateks(GREEN);
+        cout << player2 << ", Insert the Number = ";
+        warnateks(WHITE);
+        giliran = 0;
+        strcpy(giliran_player, player2);
+    }
+    cin >> info_simbol;
+    
+    if (info_simbol == 0){
+        if(giliran == 0){
+            giliran = -1;
+        }
+        else{
+            giliran = 0;
+        }
+        saveRecords("game_records.dat", Head, size_board, giliran, player1, player2);
+        loop = false;
+    }
+    else{
+        search = searchingNode(Head, info_simbol);
+
+        if (search == nullptr){
+            if (giliran == 0){
+                giliran = -1;
+            }
+            else {
+                giliran = 0;
+            }
+            cout << " !! Sorry, Dosen't exist the number " << info_simbol << " , Press Enter to Insert Again !! ";
+            cin.ignore();
+            cin.get();
+        }
+        else{
+            search -> info = giliran;
+            if (size_board == 3){
+                win = checkWin(search, 3, giliran);
+            }
+            else if(size_board == 4 || size_board == 5){
+                win = checkWin(search, 4, giliran);
+            }
+            else{
+                win = checkWin(search, 5, giliran);
+            }
+        }
+
+        if(!win){
+            loop = checkBoard(Head);
+        }
+        else{
+            showBoard(Head, size_board);
+            cout << " Kamu Menang, " << giliran_player;
+            cin.ignore();
+            cin.get();
+            loop = false;
+        }
+    }
+    return loop;
 }

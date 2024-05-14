@@ -7,13 +7,11 @@
 #include <Windows.h>
 
 int main(){
-    address search, Head;
+    address Head;
     int pilihan, giliran = 0;
-    int info_simbol;
     int size_board;
     bool loop = true;
-    bool win = false;
-    string player1, player2, giliran_player;
+    char player1[50], player2[50];
 
     pilihan = menu();
 
@@ -32,9 +30,11 @@ int main(){
                 cout << "Insert Size Board = ";
                 cin >> size_board;
                 cout << "Insert Name Player 1 = ";
-                cin >> player1;
+                cin.ignore();
+                cin.getline(player1, 50);
                 cout << "Insert Name Player 2 = ";
-                cin >> player2;
+                cin.ignore();
+                cin.getline(player2, 50);
 
                 if(size_board < 0 || size_board > 6){
                     cout << " !! The Input is Wrong, Press Enter to Insert Again !! ";
@@ -46,76 +46,9 @@ int main(){
 
             size_board = size_board + 2;
             Head = createBoard(size_board);
-
             do{
                 showBoard(Head, size_board);
-                if (size_board == 3){
-                    cout << " Menang = 3 Streak ";                
-                }
-                else if(size_board == 4 || size_board == 5){
-                    cout << " Menang = 4 Streak ";
-                }
-                else{
-                    cout << " Menang = 5 Streak ";
-                }
-                cout << "\n Press 0 to Exit \n";
-                if(giliran == 0){
-                    warnateks(BLUE);
-                    cout << player1 << ", Insert the Number = ";
-                    warnateks(WHITE);
-                    giliran = -1;
-                    giliran_player = player1;
-                }
-                else{
-                    warnateks(GREEN);
-                    cout << player2 << ", Insert the Number = ";
-                    warnateks(WHITE);
-                    giliran = 0;
-                    giliran_player = player2;
-                }
-                cin >> info_simbol;
-                if (info_simbol == 0){
-                    saveRecords("game_records.dat", Head, size_board);
-                    loop = false;
-                }
-                else{
-                    search = searchingNode(Head, info_simbol);
-
-                    if (search == nullptr){
-                        if (giliran == 0){
-                            giliran = -1;
-                        }
-                        else {
-                            giliran = 0;
-                        }
-                        cout << " !! Sorry, Dosen't exist the number " << info_simbol << " , Press Enter to Insert Again !! ";
-                        cin.ignore();
-                        cin.get();
-                    }
-                    else{
-                        search -> info = giliran;
-                        if (size_board == 3){
-                            win = checkWin(search, 3, giliran);
-                        }
-                        else if(size_board == 4 || size_board == 5){
-                            win = checkWin(search, 4, giliran);
-                        }
-                        else{
-                            win = checkWin(search, 5, giliran);
-                        }
-                    }
-
-                    if(!win){
-                        loop = checkBoard(Head);
-                    }
-                    else{
-                        showBoard(Head, size_board);
-                        cout << " Kamu Menang, " << giliran_player;
-                        cin.ignore();
-                        cin.get();
-                        loop = false;
-                    }
-                }
+                loop = gameplay(Head, size_board, giliran, player1, player2);
             }while(loop);
             break;
         
@@ -131,8 +64,12 @@ int main(){
             break;
 
         case 7:
-            size_board = readRecords("game_records.dat", Head);
-            showBoard(Head, size_board);
+            size_board = readRecords("game_records.dat", Head, giliran, player1, player2);
+            do{
+                showBoard(Head, size_board);
+                gameplay(Head, size_board, giliran, player1, player2);
+            }while(loop);
+
             break;
 
         case 0:
