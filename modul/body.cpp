@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstring>
 
 address createBoard(int size_board){
     address Head = NULL;
@@ -263,7 +264,7 @@ void saveRecords(const char* filename, address head, int size_board, int giliran
 
     outFile.write(reinterpret_cast<char*>(&size_board), sizeof(int));
     outFile.write(reinterpret_cast<char*>(&giliran), sizeof(int));
-    outFile.write(reinterpret_cast<char*>(&player1), sizeof(char[50]));
+    outFile.write(reinterpret_cast<char*>(&player1), sizeof(player1));
     outFile.write(reinterpret_cast<char*>(&player2), sizeof(char[50]));
 
     
@@ -290,7 +291,7 @@ int readRecords(const char* filename, address& head, int& giliran, char* player1
 
     inFile.read(reinterpret_cast<char*>(&size_board), sizeof(int));
     inFile.read(reinterpret_cast<char*>(&giliran), sizeof(int));
-    inFile.read(reinterpret_cast<char*>(&player1), sizeof(char[50]));
+    inFile.read(reinterpret_cast<char*>(&player1), sizeof(player1));
     inFile.read(reinterpret_cast<char*>(&player2), sizeof(char[50]));
 
     address rowStart = NULL;
@@ -334,9 +335,8 @@ int readRecords(const char* filename, address& head, int& giliran, char* player1
             temp_last = newNode;
         }
 
-    upNode = rowStart;
-    rowStart = NULL;
-
+        upNode = rowStart;
+        rowStart = NULL;
     }   
     inFile.close();
     return size_board;
@@ -408,7 +408,7 @@ int menu() {
    	gotoxy(i,25);printf(" []                      []\n");
    	gotoxy(i,26);printf(" [][][][][][][][][][][][][]\n");
 	gotoxy(i,28);printf("    Choose :            \n");
-   	gotoxy(41,28);scanf("%d",&pilih_menu);
+   	gotoxy(50,28);scanf("%d",&pilih_menu);
    	return pilih_menu;
 }
 
@@ -628,14 +628,22 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
 
         if(!win){
             loop = checkBoard(Head);
+            if(loop == false){
+                removeFile();
+            }
         }
         else{
             showBoard(Head, size_board);
             cout << " Kamu Menang, " << giliran_player;
             cin.ignore();
             cin.get();
+            removeFile();
             loop = false;
         }
     }
     return loop;
+}
+
+void removeFile() {
+    remove("game_records.dat");
 }
