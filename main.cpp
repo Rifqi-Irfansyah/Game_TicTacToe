@@ -25,12 +25,28 @@ int main(){
             loopLuar = false;
         }
         else if (pilihan == 1 && size_board != 0){
-            gotoxy(37,30); cout << " 1. Play New Game"<<endl;
-            gotoxy(37,31); cout << " 2. Continue Game"<<endl;
-            gotoxy(37,32); cout << " Insert Choice : ";
+            system("cls");
+            int i = 20;
+	        judul();
+            warnateks(WHITE);
+            gotoxy(i,18);printf(" [][][][][][][][][][][][][][][][][][][][][][][]\n");
+            gotoxy(i,19);printf(" []                   PLAYING                []\n");
+            gotoxy(i,20);printf(" []                                          []\n");
+            gotoxy(i,21);printf(" []   [1] PLAY NEW GAME                      []\n");
+            gotoxy(i,22);printf(" []   [2] CONTINUE GAME                      []\n");
+            gotoxy(i,23);printf(" []   [0] BACK                               []\n");
+            gotoxy(i,24);printf(" []                                          []\n");
+            gotoxy(i,25);printf(" []   CHOOSE :                               []\n");
+            gotoxy(i,26);printf(" []                                          []\n");
+            gotoxy(i,27);printf(" [][][][][][][][][][][][][][][][][][][][][][][]\n");
+            gotoxy(35,25);
+    
             cin >> pilihan_game;
             if(pilihan_game == 2){
                 pilihan = 7;
+            }
+            else if(pilihan_game == 0){
+                pilihan = 0;
             }
         }
 
@@ -39,14 +55,23 @@ int main(){
                 do{
                     loop = false;
                     system("cls");
-                    SetConsoleOutputCP(CP_UTF8);
-                    cout << "----------------------------------------\n";
-                    cout << "| 1. 3 X 3   || 4. 6 X 6   || 0. Back   |\n";
-                    cout << "| 2. 4 X 4   || 5. 7 X 7   ||           |\n";
-                    cout << "| 3. 5 X 5   || 6. 8 x 8   ||           |\n";
-                    cout << "----------------------------------------\n";
-                    cout << "Insert Size Board = ";
-                    cin >> size_board;
+                    int i = 5;
+                    gotoxy(i,3);  cout <<" [][][][][][][][][][][][][][][][][][][][][][][]\n";
+                    gotoxy(i,4);  cout <<" []                SIZE BOARD                []\n";
+                    gotoxy(i,5);  cout <<" []                                          []\n";
+                    gotoxy(i,6);  cout <<" []   [1] SIZE 3x3           [5] SIZE 6x6    []\n";
+                    gotoxy(i,7);  cout <<" []   [2] SIZE 4x4           [6] SIZE 7x7    []\n";
+                    gotoxy(i,8);  cout <<" []   [3] SIZE 5x5           [0] BACK        []\n";
+                    gotoxy(i,9);  cout <<" []   [4] SIZE 6x6                           []\n";
+                    gotoxy(i,10); cout <<" []                                          []\n";
+                    gotoxy(i,11); cout <<" []   CHOOSE :                               []\n";
+                    gotoxy(i,12); cout <<" []                                          []\n";
+                    gotoxy(i,13); cout <<" []                                          []\n";
+                    gotoxy(i,14); cout <<" []                                          []\n";
+                    gotoxy(i,15); cout <<" [][][][][][][][][][][][][][][][][][][][][][][]\n";
+                    gotoxy(i+15,11); cin >> size_board;
+
+                    gotoxy(i+6,12);
                     if(size_board < 0 || size_board > 6){
                         cout << " !! The Input is Wrong, Press Enter to Insert Again !! ";
                         cin.ignore();
@@ -57,7 +82,7 @@ int main(){
                         cout << "Insert Name Player 1 = ";
                         cin.ignore();
                         cin.getline(player1, 50);
-                        cout << "Insert Name Player 2 = ";
+                        gotoxy(i+6,13); cout << "Insert Name Player 2 = ";
                         cin.getline(player2, 50);
                     }
                 }while(loop == true);
@@ -96,7 +121,6 @@ int main(){
                 break;
 
             case 0:
-                exit(1);
                 break;
 
             default:

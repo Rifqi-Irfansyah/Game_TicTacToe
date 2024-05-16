@@ -6,6 +6,64 @@
 #include <string>
 #include <cstring>
 
+void judul(){ 
+	warnateks(WHITE);
+    int width;
+    width = 1;
+    gotoxy(width,3); cout << " [][][][] [][]   [][][][]   [][][][]   [][][]     [][][][]   [][][][] [][][][]   [][][][] \n";
+    gotoxy(width,4); cout << "   [][]   [][]  [][]          [][]    []    []   [][]          [][]  [][]  [][]  []       \n";
+    gotoxy(width,5); cout << "   [][]   [][]  [][]          [][]   [][][][][]  [][]          [][]  [][]  [][]  [][][][] \n";
+    gotoxy(width,6); cout << "   [][]   [][]  [][]          [][]   [][]  [][]  [][]          [][]  [][]  [][]  []       \n";
+    gotoxy(width,7); cout << "   [][]   [][]   [][][][]     [][]   [][]  [][]   [][][][]     [][]   [][][][]   [][][][] \n";
+
+	width = 93;
+	warnateks(BLUE);
+	gotoxy(width,3); cout <<"[][][]         [][][] \n";
+    gotoxy(width,4); cout <<" [][][]       [][][] \n";
+    gotoxy(width,5); cout <<"  [][][]     [][][] \n";
+	gotoxy(width,6); cout <<"   [][][]   [][][] \n";
+	gotoxy(width,7); cout <<"    [][][][][][] \n";
+	gotoxy(width,8); cout <<"     [][][][][] \n";
+	gotoxy(width,9); cout <<"    [][][][][][] \n";
+	gotoxy(width,10); cout <<"   [][][]   [][][] \n";
+	gotoxy(width,11); cout <<"  [][][]     [][][] \n";
+    gotoxy(width,12); cout <<" [][][]       [][][] \n";
+    gotoxy(width,13); cout <<"[][][]         [][][] \n";
+	
+    warnateks(GREEN);
+	gotoxy(width,17); cout <<"  [][][][][][][][][] \n";
+    gotoxy(width,18); cout <<" [][][][][][][][][][] \n";
+    gotoxy(width,19); cout <<"[][][]          [][][] \n";
+    gotoxy(width,20); cout <<"[][][]          [][][] \n";
+    gotoxy(width,21); cout <<"[][][]          [][][] \n";
+    gotoxy(width,22); cout <<"[][][]          [][][] \n";
+    gotoxy(width,23); cout <<"[][][]          [][][] \n";
+    gotoxy(width,24); cout <<"[][][]          [][][] \n";
+    gotoxy(width,25); cout <<"[][][]          [][][] \n";
+    gotoxy(width,26); cout <<" [][][][][][][][][][] \n";
+    gotoxy(width,27); cout <<"  [][][][][][][][][] \n";
+}
+
+int menu() { 
+	int pilih_menu, i = 20;
+	judul();
+	warnateks(WHITE);
+	gotoxy(i,18);printf(" [][][][][][][][][][][][][][][][][][][][][][][]\n");
+   	gotoxy(i,19);printf(" []                 MAIN MENU                []\n");
+   	gotoxy(i,20);printf(" []                                          []\n");
+   	gotoxy(i,21);printf(" []   [1] PLAY NOW !                         []\n");
+   	gotoxy(i,22);printf(" []   [2] INSTRUCTIONS                       []\n");
+   	gotoxy(i,23);printf(" []   [3] THE CREATOR                        []\n");
+   	gotoxy(i,24);printf(" []   [0] Exit                               []\n");
+   	gotoxy(i,25);printf(" []                                          []\n");
+   	gotoxy(i,26);printf(" []   CHOOSE :                               []\n");
+   	gotoxy(i,27);printf(" []                                          []\n");
+   	gotoxy(i,28);printf(" [][][][][][][][][][][][][][][][][][][][][][][]\n");
+	gotoxy(35,26);
+    scanf("%d",&pilih_menu);
+   	return pilih_menu;
+}
+
 address createBoard(int size_board){
     address Head = NULL;
     address rowStart = NULL;
@@ -358,58 +416,6 @@ void warnateks(int warna) //modul yang berfungsi untuk memberi warna ke karakter
 	HANDLE hConsole; 
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, warna);
-}
-
-void judul()//sebagai tampilan awal program
-{ 
-	warnateks(LIGHT_BLUE);
-	gotoxy(8,1); 
-    printf("\n          [][][][][][]  [][]   [][][][][]          [][][][][][]   [][][][]    [][][][][] \n");
-	printf("              [][]      [][]  [][]                     [][]      [][]  [][]  [][]     \n");
-	printf("              [][]      [][]  [][]                     [][]      [][]  [][]  [][]     \n");
-	printf("              [][]      [][]  [][]                     [][]      [][][][][]  [][]     \n");
-	printf("              [][]      [][]  [][]                     [][]      [][]  [][]  [][]     \n");
-	printf("              [][]      [][]   [][][][][]              [][]      [][]  [][]   [][][][][] \n\n\n\n");
-	
-	printf("      		               [][][][][][]  [][][][][]   [][][][][] \n");
-	printf("	 	                   [][]     [][]    [][]  []          \n");
-	printf("		                   [][]     [][]    [][]  [][][][][]  \n");
-	printf("		                   [][]     [][]    [][]  []          \n");
-	printf("                                   [][]     [][]    [][]  []          \n");
-	printf("		                   [][]      [][][][][]   [][][][][] \n");
-	
-	warnateks(LIGHT_GREEN);
-	gotoxy(9,18); printf("[][]       [][] \n");
-	gotoxy(9,19); printf("  [][]   [][] \n");
-	gotoxy(9,20); printf("    [][][] \n");
-	gotoxy(9,21); printf("    [][][] \n");
-	gotoxy(9,22); printf("  [][]   [][] \n");
-	gotoxy(9,23); printf("[][]       [][] \n");	
-	warnateks(YELLOW);
-	gotoxy(70,18); printf("    [][][][]  \n");
-	gotoxy(70,19); printf("  [][]    [][] \n");
-	gotoxy(70,20); printf("  [][]    [][] \n");
-	gotoxy(70,21); printf("  [][]    [][] \n");
-	gotoxy(70,22); printf("  [][]    [][] \n");
-	gotoxy(70,23); printf("    [][][][] \n");	
-}
-
-int menu() { 
-	int pilih_menu, i = 37;
-	judul();
-	warnateks(WHITE);
-	gotoxy(i,18);printf(" [][][][][][][][][][][][][]\n");
-   	gotoxy(i,19);printf(" []      MAIN MENU       []\n");
-   	gotoxy(i,20);printf(" []                      []\n");
-   	gotoxy(i,21);printf(" []   [1] PLAY NOW !     []\n");
-   	gotoxy(i,22);printf(" []   [2] INSTRUCTIONS   []\n");
-   	gotoxy(i,23);printf(" []   [3] THE CREATOR    []\n");
-   	gotoxy(i,24);printf(" []   [0] Exit           []\n");
-   	gotoxy(i,25);printf(" []                      []\n");
-   	gotoxy(i,26);printf(" [][][][][][][][][][][][][]\n");
-	gotoxy(i,28);printf("    Choose :            \n");
-   	gotoxy(50,28);scanf("%d",&pilih_menu);
-   	return pilih_menu;
 }
 
 bool checkBoard(address Head){

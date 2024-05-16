@@ -71,7 +71,7 @@ void saveRecords(const char* filename, address head, int size_board, int giliran
 bool checkBoard(address Head);
 bool checkEmptyBoard(address Head);
 bool checkWin(address node, int streak, infotype nilai);
-bool gameplay(address Head, int size_board, int &giliran, char* &player1, char* &player2);
+bool gameplay(address Head, int size_board, int &giliran, char* player1, char* player2);
 void removeFile();
 
 #include"body.cpp"
