@@ -3,16 +3,16 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
-#include<stdlib.h>
-#include<stdio.h>
-#include<string>
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<conio.h>
-#include<windows.h>
-#include<time.h>
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <conio.h>
+#include <windows.h>
+#include <time.h>
 
 #define BLACK           0
 #define DARK_BLUE       1
@@ -33,6 +33,22 @@
 #define STDALERT      140
 #define STDHEADER     143
 #define STDBACKGROUND 159
+#define BACKGROUND_BLACK 0x0000       // Warna hitam
+#define BACKGROUND_CYAN 0x0030        // Warna cyan
+#define BACKGROUND_MAGENTA 0x0050     // Warna magenta
+#define BACKGROUND_BROWN 0x0060       // Warna coklat
+#define BACKGROUND_LIGHTGRAY 0x0070   // Warna abu-abu muda
+#define BACKGROUND_DARKGRAY 0x0080    // Warna abu-abu gelap
+#define BACKGROUND_LIGHTBLUE 0x0090   // Warna biru muda
+#define BACKGROUND_LIGHTGREEN 0x00A0  // Warna hijau muda
+#define BACKGROUND_LIGHTCYAN 0x00B0   // Warna cyan muda
+#define BACKGROUND_LIGHTRED 0x00C0    // Warna merah muda
+#define BACKGROUND_LIGHTMAGENTA 0x00D0// Warna magenta muda
+#define BACKGROUND_YELLOW 0x00E0      // Warna kuning
+#define BACKGROUND_WHITE 0x00F0       // Warna putih
+#define BACKGROUND_PURPLE 0x0050       // Warna ungu
+#define FOREGROUND_BLACK 0x00
+
 using namespace std;
 
 typedef char infotype;                   
@@ -46,10 +62,6 @@ typedef struct tElmtlist {
 } ElmtList;
 
 
-// void addNodeFirst   (address &awal, address &akhir,address &newNode, infotype nilai);    // Afriza
-// void addNodeLast    (address &awal, address &akhir,address &newNode, infotype nilai);    // Rifqi
-// void addNodeMiddle  (address &awal,address &newNode, infotype nilai);                    // Rifqi
-
 void removeNodeFirst    (address &awal);                                            // Afriza
 void removeNodeLast     (address &awal, address &akhir);                            // Rifqi
 void removeNodeMiddle   (address &awal);                                            // Afriza
@@ -58,6 +70,12 @@ void removeNodeAnywhere (address &awal, address &akhir, address &node);         
 void removeNode(address &node);                                                     // Rifqi
 void showNode  (address awal);                                                      // Afriza
 int countNode  (address awal);                                                      // Afriza
+
+void setFullScreen();
+void setColor(int color);
+void gotoxyColor(int x, int y);
+void printWithColor(const char* text, int width, int line, int color);
+
 
 address createBoard(int size_board);
 address searchingNode(address Head, infotype nilai);                                     // Rifqi

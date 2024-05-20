@@ -1,65 +1,111 @@
 // 231511066 Afriza Mu'ammar
 // 231511089 Rifqi Irfansyah
 #include "linked_list.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cstring>
+#include <windows.h>
+
+void gotoxy(int x, int y){ 
+	HANDLE hConsoleOutput;  
+	COORD dwCursorPosition;  
+	dwCursorPosition.X = x;  
+	dwCursorPosition.Y = y;  
+	hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);  
+	SetConsoleCursorPosition(hConsoleOutput,dwCursorPosition);   
+}
+
+void warnateks(int warna){ 
+	HANDLE hConsole; 
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, warna);
+}
+
+void setFullScreen() {
+    HWND hwnd = GetConsoleWindow();
+    ShowWindow(hwnd, SW_MAXIMIZE); // Maksimalkan jendela konsol
+    ShowWindow(hwnd, SW_SHOWMAXIMIZED); // Tampilkan jendela yang sudah dimaksimalkan
+}
+
+void setColor(int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
+void gotoxyColor(int x, int y) {
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void printWithColor(const char* text, int width, int line, int color) {
+    if(width != 0 && line != 0){
+        gotoxyColor(width, line);
+    }
+    int i = 0;
+    while (text[i] != '\0') {
+        if (text[i] == '[' || text[i] == ']') {
+            setColor(color);
+            cout << " ";
+        } else {
+            setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
+            cout << text[i];
+        }
+        i++;
+    }
+}
 
 void judul(){ 
 	warnateks(WHITE);
     int width;
     width = 1;
-    gotoxy(width,3); cout << " [][][][] [][]   [][][][]   [][][][]   [][][]     [][][][]   [][][][] [][][][]   [][][][] \n";
-    gotoxy(width,4); cout << "   [][]   [][]  [][]          [][]    []    []   [][]          [][]  [][]  [][]  []       \n";
-    gotoxy(width,5); cout << "   [][]   [][]  [][]          [][]   [][][][][]  [][]          [][]  [][]  [][]  [][][][] \n";
-    gotoxy(width,6); cout << "   [][]   [][]  [][]          [][]   [][]  [][]  [][]          [][]  [][]  [][]  []       \n";
-    gotoxy(width,7); cout << "   [][]   [][]   [][][][]     [][]   [][]  [][]   [][][][]     [][]   [][][][]   [][][][] \n";
 
-	width = 93;
-	warnateks(BLUE);
-	gotoxy(width,3); cout <<"[][][]         [][][] \n";
-    gotoxy(width,4); cout <<" [][][]       [][][] \n";
-    gotoxy(width,5); cout <<"  [][][]     [][][] \n";
-	gotoxy(width,6); cout <<"   [][][]   [][][] \n";
-	gotoxy(width,7); cout <<"    [][][][][][] \n";
-	gotoxy(width,8); cout <<"     [][][][][] \n";
-	gotoxy(width,9); cout <<"    [][][][][][] \n";
-	gotoxy(width,10); cout <<"   [][][]   [][][] \n";
-	gotoxy(width,11); cout <<"  [][][]     [][][] \n";
-    gotoxy(width,12); cout <<" [][][]       [][][] \n";
-    gotoxy(width,13); cout <<"[][][]         [][][] \n";
+    printWithColor("   [[][][][]  [[]  [][][][]   [][][][]   [][][]     [][][][]  [[][][][] []][][][]  [][][][] \n", width, 3, BACKGROUND_BLACK);
+    printWithColor("      []]     [[]  []]          [[]     []]  []]    [[]          [[]    []]   []]  []]      \n", width, 4, BACKGROUND_BLACK);
+    printWithColor("      []]     [[]  []]          [[]    [][][][][]   [[]          [[]    []]   []]  [][][][] \n", width, 5, BACKGROUND_BLACK);
+    printWithColor("      []]     [[]  []]          [[]    []]    [[]   [[]          [[]    []]   []]  []]       \n", width, 6, BACKGROUND_BLACK);
+    printWithColor("      []]     [[]  [][][][]     [[]    []]    [[]   [][][][]     [[]    [][[][][]  [][][][] \n", width, 7, BACKGROUND_BLACK);
+
+
+	width = 98;
+    printWithColor("[][][]         [][][] \n", width, 3, BACKGROUND_GREEN);
+    printWithColor(" [][][]       [][][]  \n", width, 4, BACKGROUND_GREEN);
+    printWithColor("  [][][]     [][][]   \n", width, 5, BACKGROUND_GREEN);
+	printWithColor("   [][][]   [][][]    \n", width, 6, BACKGROUND_GREEN);
+	printWithColor("    [][][][][][]      \n", width, 7, BACKGROUND_GREEN);
+	printWithColor("     [][][][][]       \n", width, 8, BACKGROUND_GREEN);
+	printWithColor("    [][][][][][]      \n", width, 9, BACKGROUND_GREEN);
+	printWithColor("   [][][]   [][][]    \n", width, 10, BACKGROUND_GREEN);
+	printWithColor("  [][][]     [][][]   \n", width, 11, BACKGROUND_GREEN);
+    printWithColor(" [][][]       [][][]  \n", width, 12, BACKGROUND_GREEN);
+    printWithColor("[][][]         [][][] \n", width, 13, BACKGROUND_GREEN);
 	
-    warnateks(GREEN);
-	gotoxy(width,17); cout <<"  [][][][][][][][][] \n";
-    gotoxy(width,18); cout <<" [][][][][][][][][][] \n";
-    gotoxy(width,19); cout <<"[][][]          [][][] \n";
-    gotoxy(width,20); cout <<"[][][]          [][][] \n";
-    gotoxy(width,21); cout <<"[][][]          [][][] \n";
-    gotoxy(width,22); cout <<"[][][]          [][][] \n";
-    gotoxy(width,23); cout <<"[][][]          [][][] \n";
-    gotoxy(width,24); cout <<"[][][]          [][][] \n";
-    gotoxy(width,25); cout <<"[][][]          [][][] \n";
-    gotoxy(width,26); cout <<" [][][][][][][][][][] \n";
-    gotoxy(width,27); cout <<"  [][][][][][][][][] \n";
+    printWithColor("  [][][][][][][][][] \n", width, 17, BACKGROUND_PURPLE);
+    printWithColor(" [][][][][][][][][][] \n", width, 18, BACKGROUND_PURPLE);
+    printWithColor("[][][]          [][][] \n", width, 19, BACKGROUND_PURPLE);
+    printWithColor("[][][]          [][][] \n", width, 20, BACKGROUND_PURPLE);
+    printWithColor("[][][]          [][][] \n", width, 21, BACKGROUND_PURPLE);
+    printWithColor("[][][]          [][][] \n", width, 22, BACKGROUND_PURPLE);
+    printWithColor("[][][]          [][][] \n", width, 23, BACKGROUND_PURPLE);
+    printWithColor("[][][]          [][][] \n", width, 24, BACKGROUND_PURPLE);
+    printWithColor("[][][]          [][][] \n", width, 25, BACKGROUND_PURPLE);
+    printWithColor(" [][][][][][][][][][] \n", width, 26, BACKGROUND_PURPLE);
+    printWithColor("  [][][][][][][][][] \n", width, 27, BACKGROUND_PURPLE);
 }
 
 int menu() { 
-	int pilih_menu, i = 20;
+	int pilih_menu, i = 22;
 	judul();
 	warnateks(WHITE);
-	gotoxy(i,18);printf(" [][][][][][][][][][][][][][][][][][][][][][][]\n");
-   	gotoxy(i,19);printf(" []                 MAIN MENU                []\n");
-   	gotoxy(i,20);printf(" []                                          []\n");
-   	gotoxy(i,21);printf(" []   [1] PLAY NOW !                         []\n");
-   	gotoxy(i,22);printf(" []   [2] INSTRUCTIONS                       []\n");
-   	gotoxy(i,23);printf(" []   [3] THE CREATOR                        []\n");
-   	gotoxy(i,24);printf(" []   [0] Exit                               []\n");
-   	gotoxy(i,25);printf(" []                                          []\n");
-   	gotoxy(i,26);printf(" []   CHOOSE :                               []\n");
-   	gotoxy(i,27);printf(" []                                          []\n");
-   	gotoxy(i,28);printf(" [][][][][][][][][][][][][][][][][][][][][][][]\n");
-	gotoxy(35,26);
+	printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 18, BACKGROUND_BLUE);
+   	printWithColor(" []                 MAIN MENU                []\n", i, 19, BACKGROUND_BLUE);
+   	printWithColor(" []                                          []\n", i, 20, BACKGROUND_BLUE);
+   	printWithColor(" []   (1) PLAY NOW !                         []\n", i, 21, BACKGROUND_BLUE);
+   	printWithColor(" []   (2) INSTRUCTIONS                       []\n", i, 22, BACKGROUND_BLUE);
+   	printWithColor(" []   (3) THE CREATOR                        []\n", i, 23, BACKGROUND_BLUE);
+   	printWithColor(" []   (0) Exit                               []\n", i, 24, BACKGROUND_BLUE);
+   	printWithColor(" []                                          []\n", i, 25, BACKGROUND_BLUE);
+   	printWithColor(" []   CHOOSE :                               []\n", i, 26, BACKGROUND_BLUE);
+   	printWithColor(" []                                          []\n", i, 27, BACKGROUND_BLUE);
+   	printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 28, BACKGROUND_BLUE);
+	gotoxy(37,26);
     scanf("%d",&pilih_menu);
    	return pilih_menu;
 }
@@ -116,59 +162,94 @@ address createBoard(int size_board){
 
 void showBoard(address Head, int size_board){
     system ("cls");
-    printf("\t");
+    printWithColor("\t" , 0, 0, BACKGROUND_INTENSITY);
+
     for(int i=1; i<=size_board; i++){
-        printf ("--------");
+        printWithColor("[][][][]" , 0, 0, BACKGROUND_INTENSITY);
     }
-    printf ("-\n");
+    printWithColor ("[][][][][][][]" , 0, 0, BACKGROUND_INTENSITY);
+
+    for(int j=1; j<=2; j++){
+        printWithColor("\n\t[]" , 0, 0, BACKGROUND_INTENSITY);
+        for(int i=1; i<=size_board; i++){
+            printWithColor ("        " , 0, 0, BACKGROUND_INTENSITY);
+        }
+        printWithColor("          []" , 0, 0, BACKGROUND_INTENSITY);
+    }
+
+
+    printWithColor ("\n\t[][][][][][][]" , 0, 0, BACKGROUND_INTENSITY);
+    for(int i=1; i<=size_board; i++){
+        printWithColor("[][][][]" , 0, 0, BACKGROUND_INTENSITY);
+    }
+
+    printWithColor("\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
+
+    for(int i=1; i<=size_board; i++){
+        printWithColor ("--------" , 0, 0, BACKGROUND_INTENSITY);
+    }
+    printWithColor ("-     []" , 0, 0, BACKGROUND_INTENSITY);
 
     address temp = Head;
     address temp_start;
     
     for(int i=1; i<=size_board; i++){
         temp_start = temp;
-        printf("\t");
+        printWithColor("\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
         for (int j=1; j<= size_board; j++){
-            printf ("|       ");
+            printWithColor ("|       " , 0, 0, BACKGROUND_INTENSITY);
         }
-        printf ("|\n\t");
+        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
 
     
         for (int j=1; j<= size_board; j++){
             if (temp -> info == 0){
-                printf ("|");
+                printWithColor ("|" , 0, 0, BACKGROUND_INTENSITY);
                 warnateks(GREEN);
-                printf ("   O   ");
+                printWithColor ("   O   " , 0, 0, BACKGROUND_INTENSITY);
                 warnateks(WHITE);
             }
             else if (temp -> info == -1){
-                printf ("|");
+                printWithColor ("|" , 0, 0, BACKGROUND_INTENSITY);
                 warnateks(BLUE);
-                printf ("   X   ");
+                printWithColor ("   X   " , 0, 0, BACKGROUND_INTENSITY);
                 warnateks(WHITE);
             }
             else if (temp->info <= 9){
-                printf ("|   %d   ", temp -> info);
+                printWithColor ("|",0,0,BACKGROUND_INTENSITY);
+                printf("   %d   ", temp -> info);
             }
             else{
-                printf ("|   %d  ", temp -> info);
+                printWithColor ("|",0,0,BACKGROUND_INTENSITY);
+                printf("   %d  ", temp -> info);
             }
             temp = temp->next;
         }
-        printf ("|\n\t");
-        
 
+        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
         for (int j=1; j<= size_board; j++){
-            printf ("|       ");
+            printWithColor ("|       " , 0, 0, BACKGROUND_INTENSITY);
         }
-        printf ("|\n\t");
+        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
+
         for(int i=1; i<=size_board; i++){
-            printf ("--------");
+            printWithColor ("--------" , 0, 0, BACKGROUND_INTENSITY);
         }
-            printf ("-\n");
+        printWithColor ("-     []" , 0, 0, BACKGROUND_INTENSITY);
+
 
         temp = temp_start->down;
     }
+    printWithColor("\n\t[]" , 0, 0, BACKGROUND_INTENSITY);
+    for(int i=1; i<=size_board; i++){
+        printWithColor ("        " , 0, 0, BACKGROUND_INTENSITY);
+    }
+    printWithColor("          []\n\t" , 0, 0, BACKGROUND_INTENSITY);
+
+    for(int i=1; i<=size_board; i++){
+        printWithColor("[][][][]" , 0, 0, BACKGROUND_INTENSITY);
+    }
+    printWithColor ("[][][][][][][]\n\n" , 0, 0, BACKGROUND_INTENSITY);
 }
 
 void showNode(address awal){
@@ -235,30 +316,6 @@ void removeNodeLast(address &awal, address &akhir){
             before_last -> next = NULL;
             removeNode(temp);
         }
-    }
-}
-
-void removeNodeMiddle(address &awal){
-    address before_mid, mid;
-    address node = awal;
-    int count = countNode(awal);
-    
-    if (count <= 2){
-        printf("Maaf penghapusan gagal, total node harus > 2");
-    }
-    else{
-        int i = 1;
-        while(i <= (count/2)){  //Searching middle node
-            before_mid = node;
-            node = node -> next;
-            i++;
-        }
-
-        mid = before_mid -> next;
-        before_mid -> next = NULL;
-        before_mid -> next = mid -> next;
-        mid -> next = NULL;
-        removeNode(mid);
     }
 }
 
@@ -399,23 +456,6 @@ int readRecords(const char* filename, address& head, int& giliran, char (&player
     inFile.close();
     return size_board;
 
-}
-
-void gotoxy(int x, int y) //modul untuk memfungsikan fungsi gotoxy
-{ 
-	HANDLE hConsoleOutput;  
-	COORD dwCursorPosition;  
-	dwCursorPosition.X = x;  
-	dwCursorPosition.Y = y;  
-	hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);  
-	SetConsoleCursorPosition(hConsoleOutput,dwCursorPosition);   
-}
-
-void warnateks(int warna) //modul yang berfungsi untuk memberi warna ke karakter
-{ 
-	HANDLE hConsole; 
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hConsole, warna);
 }
 
 bool checkBoard(address Head){
@@ -568,16 +608,21 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
     bool win = false;
     bool loop = true;
 
+    gotoxy(10,2);
     if (size_board == 3){
-        cout << " Menang = 3 Streak ";                
+        cout << " 3 STREAK TO WIN ";                
     }
     else if(size_board == 4 || size_board == 5){
-        cout << " Menang = 4 Streak ";
+        cout << " 4 STREAK TO WIN ";
     }
     else{
-        cout << " Menang = 5 Streak ";
+        cout << " 5 STREAK TO WIN ";
     }
-    cout << "\n Press 0 to Exit \n";
+
+    int height = (size_board * 4) + 8;
+    gotoxy(8, height);
+    cout << "Press 0 to Exit";
+    gotoxy(8, height + 1);
     
     if(giliran == 0){
         warnateks(BLUE);

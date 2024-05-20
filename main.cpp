@@ -13,6 +13,9 @@ int main(){
     bool loop = true, loopLuar;
     char player1[50], player2[50];
 
+    setFullScreen();
+    setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
+
     do{
         system("cls");
         Head = NULL;
@@ -26,20 +29,20 @@ int main(){
         }
         else if (pilihan == 1 && size_board != 0){
             system("cls");
-            int i = 20;
+            int i = 22;
 	        judul();
             warnateks(WHITE);
-            gotoxy(i,18);printf(" [][][][][][][][][][][][][][][][][][][][][][][]\n");
-            gotoxy(i,19);printf(" []                   PLAYING                []\n");
-            gotoxy(i,20);printf(" []                                          []\n");
-            gotoxy(i,21);printf(" []   [1] PLAY NEW GAME                      []\n");
-            gotoxy(i,22);printf(" []   [2] CONTINUE GAME                      []\n");
-            gotoxy(i,23);printf(" []   [0] BACK                               []\n");
-            gotoxy(i,24);printf(" []                                          []\n");
-            gotoxy(i,25);printf(" []   CHOOSE :                               []\n");
-            gotoxy(i,26);printf(" []                                          []\n");
-            gotoxy(i,27);printf(" [][][][][][][][][][][][][][][][][][][][][][][]\n");
-            gotoxy(35,25);
+            gotoxy(i,18); cout <<" [][][][][][][][][][][][][][][][][][][][][][][]\n";
+            gotoxy(i,19); cout <<" []                   PLAYING                []\n";
+            gotoxy(i,20); cout <<" []                                          []\n";
+            gotoxy(i,21); cout <<" []   [1] PLAY NEW GAME                      []\n";
+            gotoxy(i,22); cout <<" []   [2] CONTINUE GAME                      []\n";
+            gotoxy(i,23); cout <<" []   [0] BACK                               []\n";
+            gotoxy(i,24); cout <<" []                                          []\n";
+            gotoxy(i,25); cout <<" []   CHOOSE :                               []\n";
+            gotoxy(i,26); cout <<" []                                          []\n";
+            gotoxy(i,27); cout <<" [][][][][][][][][][][][][][][][][][][][][][][]\n";
+            gotoxy(37,25);
     
             cin >> pilihan_game;
             if(pilihan_game == 2){
@@ -56,19 +59,19 @@ int main(){
                     loop = false;
                     system("cls");
                     int i = 5;
-                    gotoxy(i,3);  cout <<" [][][][][][][][][][][][][][][][][][][][][][][]\n";
-                    gotoxy(i,4);  cout <<" []                SIZE BOARD                []\n";
-                    gotoxy(i,5);  cout <<" []                                          []\n";
-                    gotoxy(i,6);  cout <<" []   [1] SIZE 3x3           [5] SIZE 6x6    []\n";
-                    gotoxy(i,7);  cout <<" []   [2] SIZE 4x4           [6] SIZE 7x7    []\n";
-                    gotoxy(i,8);  cout <<" []   [3] SIZE 5x5           [0] BACK        []\n";
-                    gotoxy(i,9);  cout <<" []   [4] SIZE 6x6                           []\n";
-                    gotoxy(i,10); cout <<" []                                          []\n";
-                    gotoxy(i,11); cout <<" []   CHOOSE :                               []\n";
-                    gotoxy(i,12); cout <<" []                                          []\n";
-                    gotoxy(i,13); cout <<" []                                          []\n";
-                    gotoxy(i,14); cout <<" []                                          []\n";
-                    gotoxy(i,15); cout <<" [][][][][][][][][][][][][][][][][][][][][][][]\n";
+                    printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 3, BACKGROUND_INTENSITY);
+                    printWithColor(" []                SIZE BOARD                []\n", i, 4, BACKGROUND_INTENSITY);
+                    printWithColor(" []                                          []\n", i, 5, BACKGROUND_INTENSITY);
+                    printWithColor(" []   (1) SIZE 3x3           (5) SIZE 6x6    []\n", i, 6, BACKGROUND_INTENSITY);
+                    printWithColor(" []   (2) SIZE 4x4           (6) SIZE 7x7    []\n", i, 7, BACKGROUND_INTENSITY);
+                    printWithColor(" []   (3) SIZE 5x5           (0) BACK        []\n", i, 8, BACKGROUND_INTENSITY);
+                    printWithColor(" []   (4) SIZE 6x6                           []\n", i, 9, BACKGROUND_INTENSITY);
+                    printWithColor(" []                                          []\n", i, 10, BACKGROUND_INTENSITY);
+                    printWithColor(" []   CHOOSE :                               []\n", i, 11, BACKGROUND_INTENSITY);
+                    printWithColor(" []                                          []\n", i, 12, BACKGROUND_INTENSITY);
+                    printWithColor(" []                                          []\n", i, 13, BACKGROUND_INTENSITY);
+                    printWithColor(" []                                          []\n", i, 14, BACKGROUND_INTENSITY);
+                    printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 15, BACKGROUND_INTENSITY);
                     gotoxy(i+15,11); cin >> size_board;
 
                     gotoxy(i+6,12);
