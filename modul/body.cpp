@@ -1,7 +1,6 @@
 // 231511066 Afriza Mu'ammar
 // 231511089 Rifqi Irfansyah
 #include "linked_list.h"
-#include <windows.h>
 
 void gotoxy(int x, int y){ 
 	HANDLE hConsoleOutput;  
@@ -44,7 +43,12 @@ void printWithColor(const char* text, int width, int line, int color) {
         if (text[i] == '[' || text[i] == ']') {
             setColor(color);
             cout << " ";
-        } else {
+        }
+        else if(text[i] == '_'){
+            setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLUE);
+            cout << "=";
+        }
+        else {
             setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
             cout << text[i];
         }
@@ -53,7 +57,6 @@ void printWithColor(const char* text, int width, int line, int color) {
 }
 
 void judul(){ 
-	warnateks(WHITE);
     int width;
     width = 1;
 
@@ -65,35 +68,34 @@ void judul(){
 
 
 	width = 98;
-    printWithColor("[][][]         [][][] \n", width, 3, BACKGROUND_GREEN);
-    printWithColor(" [][][]       [][][]  \n", width, 4, BACKGROUND_GREEN);
-    printWithColor("  [][][]     [][][]   \n", width, 5, BACKGROUND_GREEN);
-	printWithColor("   [][][]   [][][]    \n", width, 6, BACKGROUND_GREEN);
-	printWithColor("    [][][][][][]      \n", width, 7, BACKGROUND_GREEN);
-	printWithColor("     [][][][][]       \n", width, 8, BACKGROUND_GREEN);
-	printWithColor("    [][][][][][]      \n", width, 9, BACKGROUND_GREEN);
-	printWithColor("   [][][]   [][][]    \n", width, 10, BACKGROUND_GREEN);
-	printWithColor("  [][][]     [][][]   \n", width, 11, BACKGROUND_GREEN);
-    printWithColor(" [][][]       [][][]  \n", width, 12, BACKGROUND_GREEN);
-    printWithColor("[][][]         [][][] \n", width, 13, BACKGROUND_GREEN);
+    printWithColor("[][][]        [][][] \n", width, 3, BACKGROUND_RED);
+    printWithColor(" [][][]      [][][]  \n", width, 4, BACKGROUND_RED);
+    printWithColor("  [][][]    [][][]   \n", width, 5, BACKGROUND_RED);
+	printWithColor("   [][][]  [][][]    \n", width, 6, BACKGROUND_RED);
+	printWithColor("    [][][][][][]      \n", width, 7, BACKGROUND_RED);
+	printWithColor("     [][][][][]       \n", width, 8, BACKGROUND_RED);
+	printWithColor("    [][][][][][]      \n", width, 9, BACKGROUND_RED);
+	printWithColor("   [][][]  [][][]    \n", width, 10, BACKGROUND_RED);
+	printWithColor("  [][][]    [][][]   \n", width, 11, BACKGROUND_RED);
+    printWithColor(" [][][]      [][][]  \n", width, 12, BACKGROUND_RED);
+    printWithColor("[][][]        [][][] \n", width, 13, BACKGROUND_RED);
 	
-    printWithColor("  [][][][][][][][][] \n", width, 17, BACKGROUND_PURPLE);
-    printWithColor(" [][][][][][][][][][] \n", width, 18, BACKGROUND_PURPLE);
-    printWithColor("[][][]          [][][] \n", width, 19, BACKGROUND_PURPLE);
-    printWithColor("[][][]          [][][] \n", width, 20, BACKGROUND_PURPLE);
-    printWithColor("[][][]          [][][] \n", width, 21, BACKGROUND_PURPLE);
-    printWithColor("[][][]          [][][] \n", width, 22, BACKGROUND_PURPLE);
-    printWithColor("[][][]          [][][] \n", width, 23, BACKGROUND_PURPLE);
-    printWithColor("[][][]          [][][] \n", width, 24, BACKGROUND_PURPLE);
-    printWithColor("[][][]          [][][] \n", width, 25, BACKGROUND_PURPLE);
-    printWithColor(" [][][][][][][][][][] \n", width, 26, BACKGROUND_PURPLE);
-    printWithColor("  [][][][][][][][][] \n", width, 27, BACKGROUND_PURPLE);
+    printWithColor("  [][][][][][][][][] \n", width, 17, BACKGROUND_WHITE);
+    printWithColor(" [][][][][][][][][][] \n", width, 18, BACKGROUND_WHITE);
+    printWithColor("[][][]          [][][] \n", width, 19, BACKGROUND_WHITE);
+    printWithColor("[][][]          [][][] \n", width, 20, BACKGROUND_WHITE);
+    printWithColor("[][][]          [][][] \n", width, 21, BACKGROUND_WHITE);
+    printWithColor("[][][]          [][][] \n", width, 22, BACKGROUND_WHITE);
+    printWithColor("[][][]          [][][] \n", width, 23, BACKGROUND_WHITE);
+    printWithColor("[][][]          [][][] \n", width, 24, BACKGROUND_WHITE);
+    printWithColor("[][][]          [][][] \n", width, 25, BACKGROUND_WHITE);
+    printWithColor(" [][][][][][][][][][] \n", width, 26, BACKGROUND_WHITE);
+    printWithColor("  [][][][][][][][][] \n", width, 27, BACKGROUND_WHITE);
 }
 
 int menu() { 
 	int pilih_menu, i = 22;
 	judul();
-	warnateks(WHITE);
 	printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 18, BACKGROUND_BLUE);
    	printWithColor(" []                 MAIN MENU                []\n", i, 19, BACKGROUND_BLUE);
    	printWithColor(" []                                          []\n", i, 20, BACKGROUND_BLUE);
@@ -162,187 +164,102 @@ address createBoard(int size_board){
 
 void showBoard(address Head, int size_board){
     system ("cls");
-    printWithColor("\t" , 0, 0, BACKGROUND_INTENSITY);
+    setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
+    printWithColor("\n\t" , 0, 0, BACKGROUND_BLUE);
 
     for(int i=1; i<=size_board; i++){
-        printWithColor("[][][][]" , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor("[][][][]" , 0, 0, BACKGROUND_BLUE);
     }
-    printWithColor ("[][][][][][][]" , 0, 0, BACKGROUND_INTENSITY);
+    printWithColor ("[][][][][][][]" , 0, 0, BACKGROUND_BLUE);
 
     for(int j=1; j<=2; j++){
-        printWithColor("\n\t[]" , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor("\n\t[]" , 0, 0, BACKGROUND_BLUE);
         for(int i=1; i<=size_board; i++){
-            printWithColor ("        " , 0, 0, BACKGROUND_INTENSITY);
+            printWithColor ("        " , 0, 0, BACKGROUND_BLUE);
         }
-        printWithColor("          []" , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor("          []" , 0, 0, BACKGROUND_BLUE);
     }
 
 
-    printWithColor ("\n\t[][][][][][][]" , 0, 0, BACKGROUND_INTENSITY);
+    printWithColor ("\n\t[]__________" , 0, 0, BACKGROUND_BLUE);
     for(int i=1; i<=size_board; i++){
-        printWithColor("[][][][]" , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor("________" , 0, 0, BACKGROUND_BLUE);
     }
+    printWithColor ("[]" , 0, 0, BACKGROUND_BLUE);
 
-    printWithColor("\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
+    printWithColor("\n\t[]    " , 0, 0, BACKGROUND_BLUE);
 
     for(int i=1; i<=size_board; i++){
-        printWithColor ("--------" , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor ("--------" , 0, 0, BACKGROUND_BLUE);
     }
-    printWithColor ("-     []" , 0, 0, BACKGROUND_INTENSITY);
+    printWithColor ("-     []" , 0, 0, BACKGROUND_BLUE);
 
     address temp = Head;
     address temp_start;
     
     for(int i=1; i<=size_board; i++){
         temp_start = temp;
-        printWithColor("\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor("\n\t[]    " , 0, 0, BACKGROUND_BLUE);
         for (int j=1; j<= size_board; j++){
-            printWithColor ("|       " , 0, 0, BACKGROUND_INTENSITY);
+            printWithColor ("|       " , 0, 0, BACKGROUND_BLUE);
         }
-        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_BLUE);
 
     
         for (int j=1; j<= size_board; j++){
             if (temp -> info == 0){
-                printWithColor ("|" , 0, 0, BACKGROUND_INTENSITY);
-                warnateks(GREEN);
-                printWithColor ("   O   " , 0, 0, BACKGROUND_INTENSITY);
-                warnateks(WHITE);
+                printWithColor ("|" , 0, 0, BACKGROUND_BLUE);
+                setColor(BACKGROUND_LIGHTBLUE|WHITE);
+                cout <<"   O   ";
             }
             else if (temp -> info == -1){
-                printWithColor ("|" , 0, 0, BACKGROUND_INTENSITY);
-                warnateks(BLUE);
-                printWithColor ("   X   " , 0, 0, BACKGROUND_INTENSITY);
-                warnateks(WHITE);
+                printWithColor ("|" , 0, 0, BACKGROUND_BLUE);
+                setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_RED);
+                cout <<"   X   ";
             }
             else if (temp->info <= 9){
-                printWithColor ("|",0,0,BACKGROUND_INTENSITY);
+                printWithColor ("|",0,0,BACKGROUND_BLUE);
                 printf("   %d   ", temp -> info);
             }
             else{
-                printWithColor ("|",0,0,BACKGROUND_INTENSITY);
+                printWithColor ("|",0,0,BACKGROUND_BLUE);
                 printf("   %d  ", temp -> info);
             }
             temp = temp->next;
         }
 
-        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_BLUE);
         for (int j=1; j<= size_board; j++){
-            printWithColor ("|       " , 0, 0, BACKGROUND_INTENSITY);
+            printWithColor ("|       " , 0, 0, BACKGROUND_BLUE);
         }
-        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor ("|     []\n\t[]    " , 0, 0, BACKGROUND_BLUE);
 
         for(int i=1; i<=size_board; i++){
-            printWithColor ("--------" , 0, 0, BACKGROUND_INTENSITY);
+            printWithColor ("--------" , 0, 0, BACKGROUND_BLUE);
         }
-        printWithColor ("-     []" , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor ("-     []" , 0, 0, BACKGROUND_BLUE);
 
 
         temp = temp_start->down;
     }
-    printWithColor("\n\t[]" , 0, 0, BACKGROUND_INTENSITY);
+
+    printWithColor ("\n\t[][][][][][][]" , 0, 0, BACKGROUND_BLUE);
     for(int i=1; i<=size_board; i++){
-        printWithColor ("        " , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor("[][][][]" , 0, 0, BACKGROUND_BLUE);
     }
-    printWithColor("          []\n\t" , 0, 0, BACKGROUND_INTENSITY);
 
+    for(int j=1; j<=2; j++){
+        printWithColor("\n\t[]" , 0, 0, BACKGROUND_BLUE);
+        for(int i=1; i<=size_board; i++){
+            printWithColor ("        " , 0, 0, BACKGROUND_BLUE);
+        }
+        printWithColor("          []" , 0, 0, BACKGROUND_BLUE);
+    }
+
+    printWithColor ("\n\t[][][][][][][]" , 0, 0, BACKGROUND_BLUE);
     for(int i=1; i<=size_board; i++){
-        printWithColor("[][][][]" , 0, 0, BACKGROUND_INTENSITY);
+        printWithColor("[][][][]" , 0, 0, BACKGROUND_BLUE);
     }
-    printWithColor ("[][][][][][][]\n\n" , 0, 0, BACKGROUND_INTENSITY);
-}
-
-void showNode(address awal){
-    if (awal == NULL){
-        printf ("\n\t\t !! List node kosong !!");
-    }
-    else{
-        address node = awal;
-        int i = 1;
-        while (node != NULL) {
-            printf ("\n\t > Node %i = %d ",i, node -> info);
-            node = node->next;
-            i++;
-        }
-    }
-    
-}
-
-int countNode (address awal){
-    if (awal == NULL){
-        return 0;
-    }
-    else{
-        address node = awal;
-        int i = 1;
-        while (node -> next != NULL){
-            node = node -> next;
-            i++;
-        }
-        return i;
-    }
-}
-
-void removeNodeFirst(address &awal){
-    if (awal == NULL){
-        printf ("Maaf penghapusan gagal, tidak ada node");
-    }
-    else{
-        address temp;
-        temp = awal;
-        awal = awal -> next;
-        removeNode(temp);
-    }
-}
-
-void removeNodeLast(address &awal, address &akhir){
-    if ((akhir == NULL) || (awal == NULL)){
-        printf ("Maaf penghapusan gagal, tidak ada node");
-    }
-    else{
-        int count = countNode(awal);
-        if(count == 1){
-            removeNode(awal);
-            removeNode(akhir);
-        }
-        else{
-            address before_last, temp;
-            before_last = awal;
-            for (int i=1; i<(count-1); i++){
-                before_last = before_last -> next;
-            }
-            temp = akhir;
-            akhir = before_last;
-            before_last -> next = NULL;
-            removeNode(temp);
-        }
-    }
-}
-
-void removeNodeAnywhere(address &awal, address &akhir, address &node){
-    if (node == awal){
-        removeNodeFirst(awal);
-    }
-    else if (node == akhir){
-        removeNodeLast(awal, akhir);
-    }
-    else{
-        address temp = node;
-        while (temp -> next != node){
-            temp = temp -> next;
-        }
-        temp -> next = NULL;
-        temp -> next = node -> next;
-        removeNode(node);
-    }
-}
-
-void removeNode(address &node){
-    cout << " # Menghapus Node -> Nilai = " << node->info<<endl;
-    if (node != NULL){
-        node = NULL;
-    }
-    free(node);
 }
 
 address searchingNode(address Head, infotype nilai){
@@ -608,7 +525,8 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
     bool win = false;
     bool loop = true;
 
-    gotoxy(10,2);
+    setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
+    gotoxy((size_board-2)*8+ 19,2);
     if (size_board == 3){
         cout << " 3 STREAK TO WIN ";                
     }
@@ -619,23 +537,22 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
         cout << " 5 STREAK TO WIN ";
     }
 
-    int height = (size_board * 4) + 8;
-    gotoxy(8, height);
+    gotoxy((size_board-2)*8+ 21,3);
     cout << "Press 0 to Exit";
-    gotoxy(8, height + 1);
+
+    int height = (size_board * 4) + 7;
+    gotoxy(11, height);
     
     if(giliran == 0){
-        warnateks(BLUE);
+        setColor(BACKGROUND_LIGHTBLUE|RED);
         strcpy(giliran_player, player1);
         cout << giliran_player << ", Insert the Number = ";
-        warnateks(WHITE);
         giliran = -1;
     }
     else{
-        warnateks(GREEN);
+        setColor(BACKGROUND_LIGHTBLUE|WHITE);
         strcpy(giliran_player, player2);
         cout << giliran_player << ", Insert the Number = ";
-        warnateks(WHITE);
         giliran = 0;
     }
     cin >> info_simbol;
@@ -660,9 +577,11 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
             else {
                 giliran = 0;
             }
-            cout << " !! Sorry, Dosen't exist the number " << info_simbol << " , Press Enter to Insert Again !! ";
+            setColor(WHITE|BACKGROUND_RED);
+            cout << "\n\n\t !! Sorry, Dosen't exist the number " << info_simbol << " , Press Enter to Insert Again !! ";
             cin.ignore();
             cin.get();
+            setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
         }
         else{
             search -> info = giliran;

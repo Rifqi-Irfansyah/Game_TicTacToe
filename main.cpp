@@ -13,10 +13,9 @@ int main(){
     bool loop = true, loopLuar;
     char player1[50], player2[50];
 
-    setFullScreen();
-    setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
-
     do{
+        setFullScreen();
+        setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
         system("cls");
         Head = NULL;
         loop = true;
@@ -32,16 +31,16 @@ int main(){
             int i = 22;
 	        judul();
             warnateks(WHITE);
-            gotoxy(i,18); cout <<" [][][][][][][][][][][][][][][][][][][][][][][]\n";
-            gotoxy(i,19); cout <<" []                   PLAYING                []\n";
-            gotoxy(i,20); cout <<" []                                          []\n";
-            gotoxy(i,21); cout <<" []   [1] PLAY NEW GAME                      []\n";
-            gotoxy(i,22); cout <<" []   [2] CONTINUE GAME                      []\n";
-            gotoxy(i,23); cout <<" []   [0] BACK                               []\n";
-            gotoxy(i,24); cout <<" []                                          []\n";
-            gotoxy(i,25); cout <<" []   CHOOSE :                               []\n";
-            gotoxy(i,26); cout <<" []                                          []\n";
-            gotoxy(i,27); cout <<" [][][][][][][][][][][][][][][][][][][][][][][]\n";
+            printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 18, BACKGROUND_BLUE);
+            printWithColor(" []                   PLAYING                []\n", i, 19, BACKGROUND_BLUE);
+            printWithColor(" []                                          []\n", i, 20, BACKGROUND_BLUE);
+            printWithColor(" []   (1) PLAY NEW GAME                      []\n", i, 21, BACKGROUND_BLUE);
+            printWithColor(" []   (2) CONTINUE GAME                      []\n", i, 22, BACKGROUND_BLUE);
+            printWithColor(" []   (0) BACK                               []\n", i, 23, BACKGROUND_BLUE);
+            printWithColor(" []                                          []\n", i, 24, BACKGROUND_BLUE);
+            printWithColor(" []   CHOOSE :                               []\n", i, 25, BACKGROUND_BLUE);
+            printWithColor(" []                                          []\n", i, 26, BACKGROUND_BLUE);
+            printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 27, BACKGROUND_BLUE);
             gotoxy(37,25);
     
             cin >> pilihan_game;
@@ -117,6 +116,7 @@ int main(){
 
             case 7:
                 do{
+                    setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
                     showBoard(Head, size_board);
                     loop = gameplay(Head, size_board, giliran, player1, player2);
                 }while(loop);

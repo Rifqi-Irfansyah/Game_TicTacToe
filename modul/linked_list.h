@@ -14,6 +14,7 @@
 #include <windows.h>
 #include <time.h>
 
+#define BOLD 1000
 #define BLACK           0
 #define DARK_BLUE       1
 #define GREEN           2
@@ -61,36 +62,25 @@ typedef struct tElmtlist {
     address down;
 } ElmtList;
 
-
-void removeNodeFirst    (address &awal);                                            // Afriza
-void removeNodeLast     (address &awal, address &akhir);                            // Rifqi
-void removeNodeMiddle   (address &awal);                                            // Afriza
-void removeNodeAnywhere (address &awal, address &akhir, address &node);             // Rifqi
-
-void removeNode(address &node);                                                     // Rifqi
-void showNode  (address awal);                                                      // Afriza
-int countNode  (address awal);                                                      // Afriza
-
 void setFullScreen();
-void setColor(int color);
-void gotoxyColor(int x, int y);
-void printWithColor(const char* text, int width, int line, int color);
-
-
-address createBoard(int size_board);
-address searchingNode(address Head, infotype nilai);                                     // Rifqi
-void showBoard(address Head, int size_board);
-int menu();
-void warnateks(int warna);
+void setColor       (int color);
+void gotoxyColor    (int x, int y);
+void gotoxy         (int x, int y);
+void printWithColor (const char* text, int width, int line, int color);
+void warnateks      (int warna);
 void judul();
-void gotoxy(int x, int y);
-int readRecords(const char* filename, address& head, int& giliran, char (&player1)[50], char (&player2)[50]);
-void saveRecords(const char* filename, address head, int size_board, int giliran, char player1[50], char player2[50]);
-bool checkBoard(address Head);
-bool checkEmptyBoard(address Head);
-bool checkWin(address node, int streak, infotype nilai);
-bool gameplay(address Head, int size_board, int &giliran, char* player1, char* player2);
+
+int menu();
+address createBoard     (int size_board);
+address searchingNode   (address Head, infotype nilai);                                                                                      
+void showBoard          (address Head, int size_board);
+bool gameplay           (address Head, int size_board, int &giliran, char* player1, char* player2);
+bool checkBoard         (address Head);
+bool checkEmptyBoard    (address Head);
+bool checkWin           (address node, int streak, infotype nilai);
 void removeFile();
+int readRecords         (const char* filename, address& head, int& giliran, char (&player1)[50], char (&player2)[50]);
+void saveRecords        (const char* filename, address head, int size_board, int giliran, char player1[50], char player2[50]);
 
 #include"body.cpp"
 
