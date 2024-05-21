@@ -32,7 +32,7 @@ int main(){
 	        judul();
             warnateks(WHITE);
             printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 18, BACKGROUND_BLUE);
-            printWithColor(" []                 CONTINUE GAME?            []\n", i, 19, BACKGROUND_BLUE);
+            printWithColor(" []                 CONTINUE GAME?           []\n", i, 19, BACKGROUND_BLUE);
             printWithColor(" []                                          []\n", i, 20, BACKGROUND_BLUE);
             printWithColor(" []   (1) PLAY NEW GAME                      []\n", i, 21, BACKGROUND_BLUE);
             printWithColor(" []   (2) CONTINUE GAME                      []\n", i, 22, BACKGROUND_BLUE);
@@ -134,6 +134,7 @@ int main(){
         }
 
     }while(loopLuar);
-    deleteBoard(Head, size_board);
+    
+    deleteBoard(Head);
     return 0;
 }

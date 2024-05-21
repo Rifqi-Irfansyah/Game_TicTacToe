@@ -82,7 +82,7 @@ bool checkWin           (address node, int streak, infotype nilai);
 void removeFile();
 int readRecords         (const char* filename, address& head, int& giliran, char (&player1)[50], char (&player2)[50]);
 void saveRecords        (const char* filename, address head, int size_board, int giliran, char player1[50], char player2[50]);
-void deleteBoard(address Head, int size_board);
+void deleteBoard(address Head);
 
 #include"body.cpp"
 

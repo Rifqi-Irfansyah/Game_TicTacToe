@@ -641,20 +641,20 @@ void removeFile() {
     remove("game_records.dat");
 }
 
-void deleteBoard(address Head, int size_board){
+void deleteBoard(address Head){
     address rowStart = Head;
-    address node;
+    address node = rowStart;
+    address temp;
 
     // loop down
-    while(node != NULL){
+    while(rowStart != NULL){
         // loop right
-        rowStart = node->down;
         node = rowStart;
         while(node != NULL){
-            cout << "menghapus" node->info;
-            node = NULL;
-            free(node);
+            temp = node;
+            node = node->next;
+            free(temp);
         }
+        rowStart = rowStart->down;
     }
-    system("pause");
 }
