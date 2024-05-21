@@ -14,8 +14,8 @@ int main(){
     char player1[50], player2[50];
 
     do{
-        setFullScreen();
         setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
+        setFullScreen();
         system("cls");
         Head = NULL;
         loop = true;
@@ -32,7 +32,7 @@ int main(){
 	        judul();
             warnateks(WHITE);
             printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 18, BACKGROUND_BLUE);
-            printWithColor(" []                   PLAYING                []\n", i, 19, BACKGROUND_BLUE);
+            printWithColor(" []                 CONTINUE GAME?            []\n", i, 19, BACKGROUND_BLUE);
             printWithColor(" []                                          []\n", i, 20, BACKGROUND_BLUE);
             printWithColor(" []   (1) PLAY NEW GAME                      []\n", i, 21, BACKGROUND_BLUE);
             printWithColor(" []   (2) CONTINUE GAME                      []\n", i, 22, BACKGROUND_BLUE);
@@ -58,19 +58,19 @@ int main(){
                     loop = false;
                     system("cls");
                     int i = 5;
-                    printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 3, BACKGROUND_INTENSITY);
-                    printWithColor(" []                SIZE BOARD                []\n", i, 4, BACKGROUND_INTENSITY);
-                    printWithColor(" []                                          []\n", i, 5, BACKGROUND_INTENSITY);
-                    printWithColor(" []   (1) SIZE 3x3           (5) SIZE 6x6    []\n", i, 6, BACKGROUND_INTENSITY);
-                    printWithColor(" []   (2) SIZE 4x4           (6) SIZE 7x7    []\n", i, 7, BACKGROUND_INTENSITY);
-                    printWithColor(" []   (3) SIZE 5x5           (0) BACK        []\n", i, 8, BACKGROUND_INTENSITY);
-                    printWithColor(" []   (4) SIZE 6x6                           []\n", i, 9, BACKGROUND_INTENSITY);
-                    printWithColor(" []                                          []\n", i, 10, BACKGROUND_INTENSITY);
-                    printWithColor(" []   CHOOSE :                               []\n", i, 11, BACKGROUND_INTENSITY);
-                    printWithColor(" []                                          []\n", i, 12, BACKGROUND_INTENSITY);
-                    printWithColor(" []                                          []\n", i, 13, BACKGROUND_INTENSITY);
-                    printWithColor(" []                                          []\n", i, 14, BACKGROUND_INTENSITY);
-                    printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 15, BACKGROUND_INTENSITY);
+                    printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 3, BACKGROUND_BLUE);
+                    printWithColor(" []                SIZE BOARD                []\n", i, 4, BACKGROUND_BLUE);
+                    printWithColor(" []                                          []\n", i, 5, BACKGROUND_BLUE);
+                    printWithColor(" []   (1) SIZE 3x3           (5) SIZE 6x6    []\n", i, 6, BACKGROUND_BLUE);
+                    printWithColor(" []   (2) SIZE 4x4           (6) SIZE 7x7    []\n", i, 7, BACKGROUND_BLUE);
+                    printWithColor(" []   (3) SIZE 5x5           (0) BACK        []\n", i, 8, BACKGROUND_BLUE);
+                    printWithColor(" []   (4) SIZE 6x6                           []\n", i, 9, BACKGROUND_BLUE);
+                    printWithColor(" []                                          []\n", i, 10, BACKGROUND_BLUE);
+                    printWithColor(" []   CHOOSE :                               []\n", i, 11, BACKGROUND_BLUE);
+                    printWithColor(" []                                          []\n", i, 12, BACKGROUND_BLUE);
+                    printWithColor(" []                                          []\n", i, 13, BACKGROUND_BLUE);
+                    printWithColor(" []                                          []\n", i, 14, BACKGROUND_BLUE);
+                    printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 15, BACKGROUND_BLUE);
                     gotoxy(i+15,11); cin >> size_board;
 
                     gotoxy(i+6,12);
@@ -94,6 +94,7 @@ int main(){
                     Head = createBoard(size_board);
                     giliran = 0;
                     do{
+                        system("cls");
                         showBoard(Head, size_board);
                         loop = gameplay(Head, size_board, giliran, player1, player2);
                     }while(loop);
@@ -116,6 +117,7 @@ int main(){
 
             case 7:
                 do{
+                    system ("cls");
                     setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
                     showBoard(Head, size_board);
                     loop = gameplay(Head, size_board, giliran, player1, player2);
@@ -132,5 +134,6 @@ int main(){
         }
 
     }while(loopLuar);
+    deleteBoard(Head, size_board);
     return 0;
 }

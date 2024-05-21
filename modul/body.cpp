@@ -93,6 +93,33 @@ void judul(){
     printWithColor("  [][][][][][][][][] \n", width, 27, BACKGROUND_WHITE);
 }
 
+void winner(char* player){ 
+    int width;
+    width = 1;
+
+    printWithColor("   []]  []   [[]  [[]  [][][][][]  [][][][][]  [][][][]  [[][][]]             \n", width, 3, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  []]       [[]  []]   [][][][]  \n", width, 4, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [][][]    [[][][]]             \n", width, 5, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [[]       [[] []     [][][][]  \n", width, 6, BACKGROUND_BLACK);
+    printWithColor("   [][][][[[][]]  [[]  []]    []]  [[]    []]  [[][][]]  []]  []             \n", width, 7, BACKGROUND_BLACK);
+
+    gotoxy(78, 5);
+    cout << "\t" <<player;
+}
+
+void draw(){ 
+    int width;
+    width = 1;
+
+    printWithColor("   []][][[]    [][][][]    [][][]    []]   []   []]       \n", width, 3, BACKGROUND_BLACK);
+    printWithColor("   []]   [[]   []]  []]   []]  [[]   []]   []   []]       \n", width, 4, BACKGROUND_BLACK);
+    printWithColor("   []]   []]   []][]][]  []][][][]]  []]   []   []]       \n", width, 5, BACKGROUND_BLACK);
+    printWithColor("   []]   [[]   []] ]]    []]    [[]  []]   []   [[]       \n", width, 6, BACKGROUND_BLACK);
+    printWithColor("   [][][][]    [[]  ]]   []]    [[]  [][][][[[][]]]       \n", width, 7, BACKGROUND_BLACK);
+
+}
+
+
 int menu() { 
 	int pilih_menu, i = 22;
 	judul();
@@ -163,7 +190,6 @@ address createBoard(int size_board){
 }
 
 void showBoard(address Head, int size_board){
-    system ("cls");
     setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
     printWithColor("\n\t" , 0, 0, BACKGROUND_BLUE);
 
@@ -373,17 +399,6 @@ int readRecords(const char* filename, address& head, int& giliran, char (&player
     inFile.close();
     return size_board;
 
-}
-
-bool checkBoard(address Head){
-    bool checkEmpty = checkEmptyBoard(Head);
-
-    if (!checkEmpty){
-        return false;
-    }
-    else{
-        return true;
-    }
 }
 
 bool checkEmptyBoard(address Head){
@@ -597,14 +612,22 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
         }
 
         if(!win){
-            loop = checkBoard(Head);
-            if(loop == false){
+            loop = checkEmptyBoard(Head);
+            if(!loop){
+                system("cls");
+                gotoxy(0,8);
+                showBoard(Head, size_board);
+                draw();
+                cin.ignore();
+                cin.get();
                 removeFile();
             }
         }
         else{
+            system("cls");
+            gotoxy(0,8);
             showBoard(Head, size_board);
-            cout << " Kamu Menang, " << giliran_player;
+            winner(giliran_player);
             cin.ignore();
             cin.get();
             removeFile();
@@ -616,4 +639,22 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
 
 void removeFile() {
     remove("game_records.dat");
+}
+
+void deleteBoard(address Head, int size_board){
+    address rowStart = Head;
+    address node;
+
+    // loop down
+    while(node != NULL){
+        // loop right
+        rowStart = node->down;
+        node = rowStart;
+        while(node != NULL){
+            cout << "menghapus" node->info;
+            node = NULL;
+            free(node);
+        }
+    }
+    system("pause");
 }

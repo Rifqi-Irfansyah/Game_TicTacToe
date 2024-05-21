@@ -69,18 +69,20 @@ void gotoxy         (int x, int y);
 void printWithColor (const char* text, int width, int line, int color);
 void warnateks      (int warna);
 void judul();
+void winner         (char* player);
+void draw();
 
 int menu();
 address createBoard     (int size_board);
 address searchingNode   (address Head, infotype nilai);                                                                                      
 void showBoard          (address Head, int size_board);
 bool gameplay           (address Head, int size_board, int &giliran, char* player1, char* player2);
-bool checkBoard         (address Head);
 bool checkEmptyBoard    (address Head);
 bool checkWin           (address node, int streak, infotype nilai);
 void removeFile();
 int readRecords         (const char* filename, address& head, int& giliran, char (&player1)[50], char (&player2)[50]);
 void saveRecords        (const char* filename, address head, int size_board, int giliran, char player1[50], char player2[50]);
+void deleteBoard(address Head, int size_board);
 
 #include"body.cpp"
 
