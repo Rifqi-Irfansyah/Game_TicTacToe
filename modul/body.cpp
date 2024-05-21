@@ -93,29 +93,31 @@ void judul(){
     printWithColor("  [][][][][][][][][] \n", width, 27, BACKGROUND_WHITE);
 }
 
-void winner(char* player){ 
-    int width;
+void winner(char* player, int size_board){ 
+    int width, height;
     width = 1;
+    height = 12 + 4*size_board;
 
-    printWithColor("   []]  []   [[]  [[]  [][][][][]  [][][][][]  [][][][]  [[][][]]             \n", width, 3, BACKGROUND_BLACK);
-    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  []]       [[]  []]   [][][][]  \n", width, 4, BACKGROUND_BLACK);
-    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [][][]    [[][][]]             \n", width, 5, BACKGROUND_BLACK);
-    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [[]       [[] []     [][][][]  \n", width, 6, BACKGROUND_BLACK);
-    printWithColor("   [][][][[[][]]  [[]  []]    []]  [[]    []]  [[][][]]  []]  []             \n", width, 7, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  [[]  [][][][][]  [][][][][]  [][][][]  [[][][]]             \n", width, height, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  []]       [[]  []]   [][][][]  \n", width, height + 1, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [][][]    [[][][]]             \n", width, height + 2, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [[]       [[] []     [][][][]  \n", width, height + 3, BACKGROUND_BLACK);
+    printWithColor("   [][][][[[][]]  [[]  []]    []]  [[]    []]  [[][][]]  []]  []             \n", width, height + 4, BACKGROUND_BLACK);
 
-    gotoxy(78, 5);
+    gotoxy(78, height + 2);
     cout << "\t" <<player;
 }
 
-void draw(){ 
-    int width;
+void draw(int size_board){ 
+    int width, height;
     width = 1;
+    height = 12 + 4*size_board;
 
-    printWithColor("   []][][[]    [][][][]    [][][]    []]   []   []]       \n", width, 3, BACKGROUND_BLACK);
-    printWithColor("   []]   [[]   []]  []]   []]  [[]   []]   []   []]       \n", width, 4, BACKGROUND_BLACK);
-    printWithColor("   []]   []]   []][]][]  []][][][]]  []]   []   []]       \n", width, 5, BACKGROUND_BLACK);
-    printWithColor("   []]   [[]   []] ]]    []]    [[]  []]   []   [[]       \n", width, 6, BACKGROUND_BLACK);
-    printWithColor("   [][][][]    [[]  ]]   []]    [[]  [][][][[[][]]]       \n", width, 7, BACKGROUND_BLACK);
+    printWithColor("   []][][[]    [][][][]    [][][]    []]   []   []]       \n", width, height  , BACKGROUND_BLACK);
+    printWithColor("   []]   [[]   []]  []]   []]  [[]   []]   []   []]       \n", width, height + 1, BACKGROUND_BLACK);
+    printWithColor("   []]   []]   []][]][]  []][][][]]  []]   []   []]       \n", width, height + 2, BACKGROUND_BLACK);
+    printWithColor("   []]   [[]   []] ]]    []]    [[]  []]   []   [[]       \n", width, height + 3, BACKGROUND_BLACK);
+    printWithColor("   [][][][]    [[]  ]]   []]    [[]  [][][][[[][]]]       \n", width, height + 4, BACKGROUND_BLACK);
 
 }
 
@@ -286,7 +288,40 @@ void showBoard(address Head, int size_board){
     for(int i=1; i<=size_board; i++){
         printWithColor("[][][][]" , 0, 0, BACKGROUND_BLUE);
     }
+
+    showChoosen(Head, size_board);
 }
+
+void showChoosen(address Head, int size_board){
+    address temp = Head;
+    address temp_start;
+    for(int i=1; i<=size_board; i++){
+        temp_start = temp;
+        for (int j=1; j<= size_board; j++){
+            if (temp -> info == 0){
+                int x = 15 + 8*j - 8;
+                int y = 6 + 4*i - 4;
+                printWithColor(" []][] ", x, y, BACKGROUND_WHITE );
+                printWithColor(" [] [] ", x, y+1, BACKGROUND_WHITE );
+                printWithColor(" []][] ", x, y+2, BACKGROUND_WHITE );
+
+                setColor(BACKGROUND_LIGHTBLUE|WHITE);
+            }
+            else if (temp -> info == -1){
+                int x = 15 + 8*j - 8;
+                int y = 6 + 4*i - 4;
+                printWithColor(" []  []", x, y, BACKGROUND_RED );
+                printWithColor("   []", x, y+1, BACKGROUND_RED );
+                printWithColor(" []  []", x, y+2, BACKGROUND_RED );
+
+                setColor(BACKGROUND_LIGHTBLUE|WHITE);
+            }
+            temp = temp->next;
+        }
+        temp = temp_start->down;
+    }
+}
+
 
 address searchingNode(address Head, infotype nilai){
     address rowStart = NULL;
@@ -561,15 +596,19 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
     if(giliran == 0){
         setColor(BACKGROUND_LIGHTBLUE|RED);
         strcpy(giliran_player, player1);
-        cout << giliran_player << ", Insert the Number = ";
+        cout << giliran_player ;
         giliran = -1;
     }
     else{
         setColor(BACKGROUND_LIGHTBLUE|WHITE);
         strcpy(giliran_player, player2);
-        cout << giliran_player << ", Insert the Number = ";
+        cout << giliran_player ;
         giliran = 0;
     }
+
+    gotoxy(11, height+1);
+    setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
+    cout << "Insert The Number = ";
     cin >> info_simbol;
     
     if (info_simbol == 0){
@@ -615,9 +654,8 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
             loop = checkEmptyBoard(Head);
             if(!loop){
                 system("cls");
-                gotoxy(0,8);
                 showBoard(Head, size_board);
-                draw();
+                draw(size_board);
                 cin.ignore();
                 cin.get();
                 removeFile();
@@ -625,9 +663,8 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
         }
         else{
             system("cls");
-            gotoxy(0,8);
             showBoard(Head, size_board);
-            winner(giliran_player);
+            winner(giliran_player, size_board);
             cin.ignore();
             cin.get();
             removeFile();
