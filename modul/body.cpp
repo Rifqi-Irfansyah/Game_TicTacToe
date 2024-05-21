@@ -99,10 +99,10 @@ void winner(char* player, int size_board){
     height = 12 + 4*size_board;
 
     printWithColor("   []]  []   [[]  [[]  [][][][][]  [][][][][]  [][][][]  [[][][]]             \n", width, height, BACKGROUND_BLACK);
-    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  []]       [[]  []]   [][][][]  \n", width, height + 1, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  []]       [[]  []]    [][][][]  \n", width, height + 1, BACKGROUND_BLACK);
     printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [][][]    [[][][]]             \n", width, height + 2, BACKGROUND_BLACK);
-    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [[]       [[] []     [][][][]  \n", width, height + 3, BACKGROUND_BLACK);
-    printWithColor("   [][][][[[][]]  [[]  []]    []]  [[]    []]  [[][][]]  []]  []             \n", width, height + 4, BACKGROUND_BLACK);
+    printWithColor("   []]  []   [[]  []]  []]    []]  [[]    []]  [[]       [[] []]     [][][][]  \n", width, height + 3, BACKGROUND_BLACK);
+    printWithColor("   [][][][[[][]]  [[]  []]    []]  [[]    []]  [[][][]]  []]  []]             \n", width, height + 4, BACKGROUND_BLACK);
 
     gotoxy(78, height + 2);
     cout << "\t" <<player;
@@ -594,13 +594,13 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
     gotoxy(11, height);
     
     if(giliran == 0){
-        setColor(BACKGROUND_LIGHTBLUE|RED);
+        setColor(BACKGROUND_RED|FOREGROUND_BLACK);
         strcpy(giliran_player, player1);
         cout << giliran_player ;
         giliran = -1;
     }
     else{
-        setColor(BACKGROUND_LIGHTBLUE|WHITE);
+        setColor(BACKGROUND_WHITE|FOREGROUND_BLACK);
         strcpy(giliran_player, player2);
         cout << giliran_player ;
         giliran = 0;
