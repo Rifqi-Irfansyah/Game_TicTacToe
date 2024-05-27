@@ -121,7 +121,6 @@ void draw(int size_board){
 
 }
 
-
 int menu() { 
 	int pilih_menu, i = 22;
 	judul();
@@ -139,6 +138,58 @@ int menu() {
 	gotoxy(37,26);
     scanf("%d",&pilih_menu);
    	return pilih_menu;
+}
+
+void instructions(){
+    int i = 22, height = 2;
+	printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n", i, height+1, BACKGROUND_BLUE);
+   	printWithColor(" []                          INSTRUCTIONS                            []\n", i, height+2, BACKGROUND_BLUE);
+   	printWithColor(" []                                                                  []\n", i, height+3, BACKGROUND_BLUE);
+   	printWithColor(" []   (1) GAME SETUP                                                 []\n", i, height+4, BACKGROUND_BLUE);
+   	printWithColor(" []       - TicTacToe is Played on 3x3 - 8x8 grid                    []\n", i, height+5, BACKGROUND_BLUE);
+   	printWithColor(" []       - There is 2 Player, one uses 'X' and other uses 'O'       []\n", i, height+6, BACKGROUND_BLUE);
+   	printWithColor(" []                                                                  []\n", i, height+7, BACKGROUND_BLUE);
+   	printWithColor(" []   (2) TAKING TURNS                                               []\n", i, height+8, BACKGROUND_BLUE);
+   	printWithColor(" []       - Players take turns placing their marks (X or O)          []\n", i, height+9, BACKGROUND_BLUE);
+   	printWithColor(" []         in an empty square                                       []\n", i, height+10, BACKGROUND_BLUE);
+   	printWithColor(" []       - Player 1 which uses 'X' always goes first                []\n", i, height+11, BACKGROUND_BLUE);
+   	printWithColor(" []                                                                  []\n", i, height+12, BACKGROUND_BLUE);
+   	printWithColor(" []   (3) WINNING GAMES                                              []\n", i, height+13, BACKGROUND_BLUE);
+   	printWithColor(" []       - A player wins by getting 'some' marks in a row           []\n", i, height+14, BACKGROUND_BLUE);
+   	printWithColor(" []         >> 3x3 grid            = 3 marks in a row                []\n", i, height+15, BACKGROUND_BLUE);
+   	printWithColor(" []         >> 4x4 & 5x5 grid      = 4 marks in a row                []\n", i, height+16, BACKGROUND_BLUE);
+   	printWithColor(" []         >> 6x6, 7x7 & 8x8 grid = 5 marks in a row                []\n", i, height+17, BACKGROUND_BLUE);
+   	printWithColor(" []       - The row can be horizontal, vertical, or diagonal         []\n", i, height+18, BACKGROUND_BLUE);
+   	printWithColor(" []                                                                  []\n", i, height+19, BACKGROUND_BLUE);
+   	printWithColor(" []   (4) ENDING GAMES                                               []\n", i, height+20, BACKGROUND_BLUE);
+   	printWithColor(" []       - The game ends if one of the players wins or              []\n", i, height+21, BACKGROUND_BLUE);
+   	printWithColor(" []         all the boxes are filled which is considered a draw      []\n", i, height+22, BACKGROUND_BLUE);
+   	printWithColor(" []                                                                  []\n", i, height+23, BACKGROUND_BLUE);
+   	printWithColor(" []                      Press Enter to Back                         []\n", i, height+24, BACKGROUND_BLUE);
+   	printWithColor(" []                                                                  []\n", i, height+25, BACKGROUND_BLUE);
+   	printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n", i, height+26, BACKGROUND_BLUE);
+	gotoxy(67,height+24);
+    cin.ignore();
+    cin.get();
+}
+
+void creator(){
+    int i = 22, height = 2;
+	printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][][][][]\n", i, height+1, BACKGROUND_BLUE);
+   	printWithColor(" []                    CREATORS                    []\n", i, height+2, BACKGROUND_BLUE);
+   	printWithColor(" []                                                []\n", i, height+3, BACKGROUND_BLUE);
+   	printWithColor(" []             This Game Created By:              []\n", i, height+4, BACKGROUND_BLUE);
+   	printWithColor(" []          AFRIZA MU'AMMAR || 231511067          []\n", i, height+5, BACKGROUND_BLUE);
+   	printWithColor(" []          RIFQI IRFANSYAH || 231511089          []\n", i, height+6, BACKGROUND_BLUE);
+   	printWithColor(" []                                                []\n", i, height+7, BACKGROUND_BLUE);
+   	printWithColor(" []                  1C-JTK 2024                   []\n", i, height+8, BACKGROUND_BLUE);
+   	printWithColor(" []                                                []\n", i, height+9, BACKGROUND_BLUE);
+   	printWithColor(" []              Press Enter to Back               []\n", i, height+10, BACKGROUND_BLUE);
+   	printWithColor(" []                                                []\n", i, height+11, BACKGROUND_BLUE);
+   	printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][][][][]\n", i, height+12, BACKGROUND_BLUE);
+	gotoxy(i+36,height+10);
+    cin.ignore();
+    cin.get();
 }
 
 address createBoard(int size_board){

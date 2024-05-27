@@ -68,9 +68,11 @@ void gotoxyColor    (int x, int y);
 void gotoxy         (int x, int y);
 void printWithColor (const char* text, int width, int line, int color);
 void warnateks      (int warna);
-void judul();
 void winner         (char* player, int size_board);
-void draw(int size_board);
+void draw           (int size_board);
+void instructions();
+void creator();
+void judul();
 
 int menu();
 address createBoard     (int size_board);

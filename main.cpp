@@ -61,8 +61,8 @@ int main(){
                     printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][]\n", i, 3, BACKGROUND_BLUE);
                     printWithColor(" []                SIZE BOARD                []\n", i, 4, BACKGROUND_BLUE);
                     printWithColor(" []                                          []\n", i, 5, BACKGROUND_BLUE);
-                    printWithColor(" []   (1) SIZE 3x3           (5) SIZE 6x6    []\n", i, 6, BACKGROUND_BLUE);
-                    printWithColor(" []   (2) SIZE 4x4           (6) SIZE 7x7    []\n", i, 7, BACKGROUND_BLUE);
+                    printWithColor(" []   (1) SIZE 3x3           (5) SIZE 7x7    []\n", i, 6, BACKGROUND_BLUE);
+                    printWithColor(" []   (2) SIZE 4x4           (6) SIZE 8x8    []\n", i, 7, BACKGROUND_BLUE);
                     printWithColor(" []   (3) SIZE 5x5           (0) BACK        []\n", i, 8, BACKGROUND_BLUE);
                     printWithColor(" []   (4) SIZE 6x6                           []\n", i, 9, BACKGROUND_BLUE);
                     printWithColor(" []                                          []\n", i, 10, BACKGROUND_BLUE);
@@ -106,13 +106,12 @@ int main(){
             
             case 2:
                 system("CLS");
-                
-                // instructions();
+                instructions();
                 break;
 
             case 3:
                 system("CLS");
-                // aboutus();
+                creator();
                 break;
 
             case 7:
