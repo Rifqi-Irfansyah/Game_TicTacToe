@@ -179,7 +179,7 @@ void creator(){
    	printWithColor(" []                    CREATORS                    []\n", i, height+2, BACKGROUND_BLUE);
    	printWithColor(" []                                                []\n", i, height+3, BACKGROUND_BLUE);
    	printWithColor(" []             This Game Created By:              []\n", i, height+4, BACKGROUND_BLUE);
-   	printWithColor(" []          AFRIZA MU'AMMAR || 231511067          []\n", i, height+5, BACKGROUND_BLUE);
+   	printWithColor(" []          AFRIZA MU'AMMAR || 231511066          []\n", i, height+5, BACKGROUND_BLUE);
    	printWithColor(" []          RIFQI IRFANSYAH || 231511089          []\n", i, height+6, BACKGROUND_BLUE);
    	printWithColor(" []                                                []\n", i, height+7, BACKGROUND_BLUE);
    	printWithColor(" []                  1C-JTK 2024                   []\n", i, height+8, BACKGROUND_BLUE);
