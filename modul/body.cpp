@@ -639,8 +639,8 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
         cout << " 5 STREAK TO WIN ";
     }
 
-    gotoxy((size_board-2)*8+ 13,3);
-    cout << "Press 1 to Instructions";
+    gotoxy((size_board-2)*8+ 12,3);
+    cout << "Press -1 to Instructions";
     gotoxy((size_board-2)*8+ 21,4);
     cout << "Press 0 to Exit";
 
