@@ -141,6 +141,7 @@ int menu() {
 }
 
 void instructions(){
+    system("cls");
     int i = 22, height = 2;
 	printWithColor(" [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\n", i, height+1, BACKGROUND_BLUE);
    	printWithColor(" []                          INSTRUCTIONS                            []\n", i, height+2, BACKGROUND_BLUE);
@@ -251,7 +252,7 @@ void showBoard(address Head, int size_board){
     }
     printWithColor ("[][][][][][][]" , 0, 0, BACKGROUND_BLUE);
 
-    for(int j=1; j<=2; j++){
+    for(int j=1; j<=3; j++){
         printWithColor("\n\t[]" , 0, 0, BACKGROUND_BLUE);
         for(int i=1; i<=size_board; i++){
             printWithColor ("        " , 0, 0, BACKGROUND_BLUE);
@@ -351,7 +352,7 @@ void showChoosen(address Head, int size_board){
         for (int j=1; j<= size_board; j++){
             if (temp -> info == 0){
                 int x = 15 + 8*j - 8;
-                int y = 6 + 4*i - 4;
+                int y = 7 + 4*i - 4;
                 printWithColor(" []][] ", x, y, BACKGROUND_WHITE );
                 printWithColor(" [] [] ", x, y+1, BACKGROUND_WHITE );
                 printWithColor(" []][] ", x, y+2, BACKGROUND_WHITE );
@@ -360,7 +361,7 @@ void showChoosen(address Head, int size_board){
             }
             else if (temp -> info == -1){
                 int x = 15 + 8*j - 8;
-                int y = 6 + 4*i - 4;
+                int y = 7 + 4*i - 4;
                 printWithColor(" []  []", x, y, BACKGROUND_RED );
                 printWithColor("   []", x, y+1, BACKGROUND_RED );
                 printWithColor(" []  []", x, y+2, BACKGROUND_RED );
@@ -638,23 +639,23 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
         cout << " 5 STREAK TO WIN ";
     }
 
-    gotoxy((size_board-2)*8+ 21,3);
+    gotoxy((size_board-2)*8+ 13,3);
+    cout << "Press 1 to Instructions";
+    gotoxy((size_board-2)*8+ 21,4);
     cout << "Press 0 to Exit";
 
-    int height = (size_board * 4) + 7;
+    int height = (size_board * 4) + 8;
     gotoxy(11, height);
     
     if(giliran == 0){
         setColor(BACKGROUND_RED|FOREGROUND_BLACK);
         strcpy(giliran_player, player1);
         cout << giliran_player ;
-        giliran = -1;
     }
     else{
         setColor(BACKGROUND_WHITE|FOREGROUND_BLACK);
         strcpy(giliran_player, player2);
         cout << giliran_player ;
-        giliran = 0;
     }
 
     gotoxy(11, height+1);
@@ -663,25 +664,16 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
     cin >> info_simbol;
     
     if (info_simbol == 0){
-        if(giliran == 0){
-            giliran = -1;
-        }
-        else{
-            giliran = 0;
-        }
         saveRecords("game_records.dat", Head, size_board, giliran, player1, player2);
         loop = false;
+    }
+    else if (info_simbol == -1){
+        instructions();
     }
     else{
         search = searchingNode(Head, info_simbol);
 
         if (search == nullptr){
-            if (giliran == 0){
-                giliran = -1;
-            }
-            else {
-                giliran = 0;
-            }
             setColor(WHITE|BACKGROUND_RED);
             cout << "\n\n\t !! Sorry, Dosen't exist the number " << info_simbol << " , Press Enter to Insert Again !! ";
             cin.ignore();
@@ -689,6 +681,13 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
             setColor(BACKGROUND_LIGHTBLUE|FOREGROUND_BLACK);
         }
         else{
+            if (giliran == 0){
+                giliran = -1;
+            }
+            else {
+                giliran = 0;
+            }
+
             search -> info = giliran;
             if (size_board == 3){
                 win = checkWin(search, 3, giliran);
