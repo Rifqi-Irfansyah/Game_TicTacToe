@@ -623,7 +623,7 @@ bool checkWin(address node, int streak, infotype nilai){
 bool gameplay(address Head, int size_board, int &giliran, char* player1, char* player2){
     address search;
     char giliran_player[50];
-    int info_simbol;
+    int info_simbol, quit;
     bool win = false;
     bool loop = true;
 
@@ -664,8 +664,16 @@ bool gameplay(address Head, int size_board, int &giliran, char* player1, char* p
     cin >> info_simbol;
     
     if (info_simbol == 0){
-        saveRecords("game_records.dat", Head, size_board, giliran, player1, player2);
-        loop = false;
+        cout << "\n\n\t Want to Quit? Game will be saved  ";
+        cout << "\n\t 1. yes";
+        cout << "\n\t 2. no";
+        cout << "\n\t Choose = ";
+        cin >> quit;
+
+        if (quit == 1){
+            saveRecords("game_records.dat", Head, size_board, giliran, player1, player2);
+            loop = false;
+        }
     }
     else if (info_simbol == -1){
         instructions();

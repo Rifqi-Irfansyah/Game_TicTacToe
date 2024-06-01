@@ -75,7 +75,9 @@ int main(){
 
                     gotoxy(i+6,12);
                     if(size_board < 0 || size_board > 6){
-                        cout << " !! The Input is Wrong, Press Enter to Insert Again !! ";
+                        cout << " !! The Input is Wrong !!";
+                        gotoxy(i+6,13);
+                        cout << " Press Enter to Insert Again ";
                         cin.ignore();
                         cin.get();
                         loop = true;
